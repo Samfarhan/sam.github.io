@@ -3,39 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Error 404 — Link Severed</title>
+    <title>VORTEX SYSTEM MASTER MATRIX // TERMINAL EXCEPTION 404</title>
+    
+    <!-- Premium Typography Clusters -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* --- LUXURY SYSTEM VARIABLES --- */
         :root {
-            --bg: #0f172a;
-            --text-pure: #ffffff;
-            --text-muted: #64748b;
-            --sapphire-lux: #0284c7;
-            --sapphire-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
-            --curve: cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-base: #030509;           
+            --surface-card: rgba(10, 18, 36, 0.45); 
+            --text-lead: #ffffff;
+            --text-body: #94a3b8;
+            --sapphire-core: #00f0ff;     
+            --sapphire-gradient: linear-gradient(135deg, #0284c7 0%, #00f0ff 100%);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'Space Grotesk', sans-serif;
+            --ease-schulz: cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.5);
+            --vortex-brightness: 100%;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: var(--text-pure); font-family: var(--font-sans); height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; -webkit-font-smoothing: antialiased; }
-
-        .error-code { font-size: clamp(5rem, 15vw, 10rem); font-weight: 700; color: var(--sapphire-lux); line-height: 1; letter-spacing: -0.05em; text-shadow: 0 0 40px rgba(2,132,199,0.15); margin-bottom: 1rem; }
-        .error-heading { font-size: 1.5rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
-        .error-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; max-width: 550px; margin-bottom: 3rem; }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
         
-        .btn-return { background: var(--sapphire-gradient); color: white; padding: 1rem 2rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; box-shadow: 0 10px 20px -5px rgba(2,132,199,0.3); transition: transform 0.3s var(--curve); }
-        .btn-return:hover { transform: translateY(-2px); }
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-lead); 
+            font-family: var(--font-display); 
+            -webkit-font-smoothing: antialiased; 
+            overflow: hidden;
+            filter: brightness(var(--vortex-brightness));
+        }
+
+        /* --- STYLISH INSANELY CLEAN CUSTOM POINTER --- */
+        body { cursor: none; } 
+        
+        #custom-cursor-dot {
+            position: fixed; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
+            pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); mix-blend-mode: difference; 
+        }
+
+        #custom-cursor-ring {
+            position: fixed; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+            pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); background: transparent;
+            transition: transform 0.3s var(--ease-schulz), width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
+        }
+
+        body.cursor-hovering #custom-cursor-dot { width: 12px; height: 12px; background: var(--sapphire-core); mix-blend-mode: normal; }
+        body.cursor-hovering #custom-cursor-ring { width: 48px; height: 48px; border-color: var(--sapphire-core); transform: translate(-50%, -50%) scale(1.1); }
+
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+            #custom-cursor-dot, #custom-cursor-ring { display: none !important; }
+        }
+
+        /* --- BACKGROUND LAYER MAPPING --- */
+        .simple-bg-grid {
+            position: absolute; inset: 0; z-index: 1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px; background-position: center top; pointer-events: none;
+        }
+
+        /* --- FIXED NAVIGATION BAR --- */
+        header {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 4rem); max-width: 1400px; padding: 0.8rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center; z-index: 10000;
+            background: rgba(3, 5, 9, 0.6); backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border); border-radius: 100px;
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow);
+        }
+
+        .agency-brand { font-family: var(--font-mono); font-weight: 700; font-size: 1.25rem; text-transform: uppercase; text-decoration: none; color: var(--text-lead); }
+        .agency-brand span { color: var(--sapphire-core); transition: color 0.4s; }
+        
+        .nav-dock-cluster { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-tab-node { text-decoration: none; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
+        .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.02); }
+
+        .brightness-module { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
+        .brightness-module label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--text-body); }
+        .vortex-slider { -webkit-appearance: none; appearance: none; width: 80px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; }
+        .vortex-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--sapphire-core); cursor: pointer; box-shadow: 0 0 8px var(--sapphire-core); }
+
+        .color-palette-tray { display: flex; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
+        .swatch-node { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+        .swatch-cyan { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+        .swatch-purple { background: #a855f7; } .swatch-emerald { background: #10b981; } .swatch-crimson { background: #ff0055; } .swatch-gold { background: #f59e0b; }
+
+        /* --- CONTENT EXCEPTION HUB --- */
+        main { 
+            height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 2rem; position: relative; z-index: 3; 
+        }
+        .error-terminal-wrapper {
+            max-width: 600px; width: 100%; text-align: center; opacity: 0; transform: translateY(30px);
+            transition: transform 0.8s var(--ease-schulz), opacity 0.6s ease;
+        }
+        .error-terminal-wrapper.reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .giant-error-code {
+            font-family: var(--font-mono); font-size: clamp(6rem, 15vw, 10rem); font-weight: 700;
+            color: transparent; -webkit-text-stroke: 2px var(--sapphire-core); line-height: 1; margin-bottom: 1rem;
+            letter-spacing: -0.05em; filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.2));
+        }
+
+        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; }
+        .exhaustive-body-copy { font-size: 0.95rem; line-height: 1.85; color: var(--text-body); margin-bottom: 2.5rem; }
+
+        .vortex-cta-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--sapphire-gradient); color: #030509; font-family: var(--font-mono);
+            font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+            padding: 1.1rem 2.8rem; border-radius: 100px; text-decoration: none; border: none;
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.4); transition: transform 0.3s var(--ease-schulz), box-shadow 0.3s;
+            cursor: none;
+        }
+        .vortex-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.6); }
+
+        @media (max-width: 1100px) {
+            header { width: calc(100% - 1.5rem); padding: 0.6rem 1.2rem; top: 1rem; border-radius: 30px; flex-direction: column; gap: 1rem; }
+            .nav-dock-cluster { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+            nav { width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .nav-tab-node { padding: 0.5rem 1rem; font-size: 0.75rem; }
+            .brightness-module { border-left: none; margin-left: 0; padding-left: 0; }
+            .color-palette-tray { border-left: none; margin-left: 0; padding-left: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="error-code">404</div>
-    <h1 class="error-heading">Routing Connection Severed</h1>
-    <p class="error-desc">The specific structural routing path node you queried has been removed or restricted from our central index matrix registry. Please verify file path parameters.</p>
-    
-    <a href="index.html" class="btn-return">Return to Core Index Matrix</a>
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-ring"></div>
+    <div class="simple-bg-grid"></div>
 
+    <header class="ui-bind">
+        <a href="index.html" class="agency-brand">VORTEX<span>_</span></a>
+        <div class="nav-dock-cluster">
+            <nav style="display: flex; gap: 0.25rem;">
+                <a href="index.html" class="nav-tab-node">INDEX</a>
+                <a href="about.html" class="nav-tab-node">ABOUT</a>
+                <a href="services.html" class="nav-tab-node">SERVICES</a>
+                <a href="portfolio.html" class="nav-tab-node">PORTFOLIO</a>
+                <a href="contact.html" class="nav-tab-node">CONTACT</a>
+            </nav>
+            
+            <div class="brightness-module">
+                <label for="vortex-lum-range">LUM</label>
+                <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
+            </div>
+
+            <div class="color-palette-tray">
+                <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
+                <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
+                <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
+                <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
+                <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="error-terminal-wrapper" id="error-card">
+            <div class="giant-error-code" id="master-error-code">404</div>
+            <span class="meta-context-label">EXCEPTION_ERR // COORDINATE_NOT_FOUND</span>
+            <p class="exhaustive-body-copy">
+                The target route path could not be parsed within the master file cluster. The connection pipeline was detached cleanly to safeguard ongoing framework data continuity.
+            </p>
+            <a href="index.html" class="vortex-cta-btn ui-bind">Return to Safe Core</a>
+        </div>
+    </main>
+
+    <!-- POINTER PHYSICS AND LOCALSTORAGE STATE RETRIEVAL ENGINE -->
+    <script>
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        const cursorRing = document.getElementById('custom-cursor-ring');
+        let mX = 0, mY = 0, ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mX = e.clientX; mY = e.clientY;
+            cursorDot.style.left = mX + 'px'; cursorDot.style.top = mY + 'px';
+        });
+
+        function processCursorAuraPhysics() {
+            ringX += (mX - ringX) * 0.12; ringY += (mY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(processCursorAuraPhysics);
+        }
+        processCursorAuraPhysics();
+
+        function bindCursorInteractions() {
+            document.querySelectorAll('button, a, .swatch-node, input, textarea').forEach(node => {
+                node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
+                node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
+            });
+        }
+        bindCursorInteractions();
+
+        /* --- THE STATE STORAGE MANAGEMENT --- */
+        function adjustGlobalLuminance(value) {
+            document.documentElement.style.setProperty('--vortex-brightness', value + '%');
+            localStorage.setItem('vortex-saved-brightness', value);
+        }
+
+        function updateGlobalPalette(hexString) {
+            document.documentElement.style.setProperty('--sapphire-core', hexString);
+            document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${hexString} 100%)`);
+            localStorage.setItem('vortex-saved-palette', hexString);
+            document.getElementById('master-error-code').style.webkitTextStrokeColor = hexString;
+        }
+
+        function applyStoredSystemStates() {
+            const savedBrightness = localStorage.getItem('vortex-saved-brightness');
+            if(savedBrightness) {
+                document.getElementById('vortex-lum-range').value = savedBrightness;
+                document.documentElement.style.setProperty('--vortex-brightness', savedBrightness + '%');
+            }
+            const savedPalette = localStorage.getItem('vortex-saved-palette');
+            if(savedPalette) {
+                document.documentElement.style.setProperty('--sapphire-core', savedPalette);
+                document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${savedPalette} 100%)`);
+                setTimeout(() => {
+                    document.getElementById('master-error-code').style.webkitTextStrokeColor = savedPalette;
+                }, 50);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            applyStoredSystemStates();
+            document.getElementById('error-card').classList.add('reveal-visible');
+        });
+    </script>
 </body>
 </html>
