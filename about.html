@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Vision Matrix — VORTEX</title>
+    <title>VORTEX SYSTEM MASTER MATRIX // PROFILE VISION</title>
     
+    <!-- Premium Typography Clusters -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* --- LUXURY SYSTEM VARIABLES --- */
         :root {
             --bg-base: #030509;           
             --surface-card: rgba(10, 18, 36, 0.45); 
@@ -18,40 +20,64 @@
             --sapphire-core: #00f0ff;     
             --sapphire-gradient: linear-gradient(135deg, #0284c7 0%, #00f0ff 100%);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
             --font-display: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'Space Grotesk', sans-serif;
             --ease-schulz: cubic-bezier(0.16, 1, 0.3, 1);
             --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.5);
+            --vortex-brightness: 100%;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-        body { background-color: var(--bg-base); color: var(--text-lead); font-family: var(--font-display); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
-        @media (pointer: fine) {
-            body { cursor: none; }
-            #cursor-core, #cursor-aura { display: block; }
+        
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-lead); 
+            font-family: var(--font-display); 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden;
+            filter: brightness(var(--vortex-brightness));
         }
 
-        #vortex-preloader {
-            position: fixed; inset: 0; background: #030509; z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: transform 1.2s var(--ease-schulz);
+        /* --- STYLISH INSANELY CLEAN CUSTOM POINTER --- */
+        body { cursor: none; } 
+        
+        #custom-cursor-dot {
+            position: fixed; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
+            pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); mix-blend-mode: difference; 
         }
-        .loader-viewport { height: 65px; overflow: hidden; position: relative; width: 100%; text-align: center; }
-        .loader-word { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.8rem, 5vw, 3.2rem); text-transform: uppercase; letter-spacing: -0.01em; position: absolute; width: 100%; color: #ffffff; opacity: 0; transform: translateY(50px); transition: transform 0.8s var(--ease-schulz), opacity 0.6s ease, filter 0.6s ease; filter: blur(8px); }
-        .loader-word.active { opacity: 1; transform: translateY(0); filter: blur(0px); }
-        .loader-word.exit { opacity: 0; transform: translateY(-50px); filter: blur(8px); }
-        .loader-track { width: 180px; height: 2px; background: rgba(255, 255, 255, 0.05); margin-top: 2rem; position: relative; border-radius: 10px; }
-        .loader-fill { position: absolute; height: 100%; width: 0%; background: var(--sapphire-core); box-shadow: 0 0 15px var(--sapphire-core); transition: width 2s cubic-bezier(0.1, 0.8, 0.1, 1); }
 
+        #custom-cursor-ring {
+            position: fixed; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+            pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); background: transparent;
+            transition: transform 0.3s var(--ease-schulz), width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
+        }
+
+        body.cursor-hovering #custom-cursor-dot { width: 12px; height: 12px; background: var(--sapphire-core); mix-blend-mode: normal; }
+        body.cursor-hovering #custom-cursor-ring { width: 48px; height: 48px; border-color: var(--sapphire-core); transform: translate(-50%, -50%) scale(1.1); }
+
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+            #custom-cursor-dot, #custom-cursor-ring { display: none !important; }
+        }
+
+        /* --- BACKGROUND LAYER MAPPING --- */
+        .simple-bg-grid {
+            position: absolute; inset: 0; z-index: 1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px; background-position: center top; pointer-events: none;
+        }
+
+        /* --- FIXED NAVBAR ASSEMBLY --- */
         header {
             position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
-            width: calc(100% - 4rem); max-width: 1500px; padding: 0.8rem 2.5rem;
+            width: calc(100% - 4rem); max-width: 1400px; padding: 0.8rem 2.5rem;
             display: flex; justify-content: space-between; align-items: center; z-index: 10000;
             background: rgba(3, 5, 9, 0.6); backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid var(--glass-border); border-radius: 12px;
+            border: 1px solid var(--glass-border); border-radius: 100px;
             box-shadow: var(--shadow-premium), var(--glass-inner-glow);
         }
 
@@ -59,169 +85,219 @@
         .agency-brand span { color: var(--sapphire-core); transition: color 0.4s; }
         
         .nav-dock-cluster { display: flex; align-items: center; gap: 0.25rem; }
-        .nav-tab-node { text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 4px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
+        .nav-tab-node { text-decoration: none; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
         .nav-tab-node.tab-active, .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.02); }
 
-        #cursor-core { position: fixed; width: 4px; height: 4px; background: var(--sapphire-core); border-radius: 50%; pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); display: none; }
-        #cursor-aura { position: fixed; width: 34px; height: 34px; border: 1px solid var(--sapphire-core); border-radius: 6px; pointer-events: none; z-index: 99998; transform: translate(-50%, -50%); display: none; transition: transform 0.06s linear; }
+        .brightness-module { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
+        .brightness-module label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--text-body); }
+        .vortex-slider { -webkit-appearance: none; appearance: none; width: 80px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; }
+        .vortex-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--sapphire-core); cursor: pointer; box-shadow: 0 0 8px var(--sapphire-core); }
 
-        main { max-width: 1600px; margin: 0 auto; padding: 11rem 4rem 4rem 4rem; position: relative; z-index: 2; }
-        .bento-matrix { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.75rem; width: 100%; }
-        
+        .color-palette-tray { display: flex; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
+        .swatch-node { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+        .swatch-cyan { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+        .swatch-purple { background: #a855f7; } .swatch-emerald { background: #10b981; } .swatch-crimson { background: #ff0055; } .swatch-gold { background: #f59e0b; }
+
+        /* --- CONTENT STRUCT PIPELINE --- */
+        main { max-width: 1600px; margin: 0 auto; padding: 10rem 4rem 6rem 4rem; position: relative; z-index: 3; }
+        .stage-canvas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.75rem; width: 100%; }
+
         .col-12 { grid-column: span 12; } .col-8 { grid-column: span 8; } 
         .col-4 { grid-column: span 4; }  .col-6 { grid-column: span 6; }
 
         .bento-card-lux { 
-            background-color: var(--surface-card); 
-            backdrop-filter: blur(25px) saturate(180%); 
-            -webkit-backdrop-filter: blur(25px) saturate(180%); 
-            border: 1px solid var(--glass-border); border-radius: 20px; 
-            padding: 4.5rem; position: relative; overflow: hidden; 
-            box-shadow: var(--shadow-premium), var(--glass-inner-glow); 
-            opacity: 0; transform: translateY(40px);
-            transition: border-color 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease; 
+            background-color: var(--surface-card); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); 
+            border: 1px solid var(--glass-border); border-radius: 20px; padding: 4.5rem; position: relative; overflow: hidden; 
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow); opacity: 0; transform: translateY(40px);
+            transition: border-color 0.5s, transform 0.8s var(--ease-schulz), opacity 0.6s ease;
         }
         .bento-card-lux.reveal-visible { opacity: 1; transform: translateY(0); }
 
         .hover-lift:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-6px); }
         .hover-tilt:hover { transform: translateY(-4px) rotate(0.5deg); border-color: var(--sapphire-core); }
-        .hover-pulse:hover { animation: subtleCardPulse 2s infinite ease-in-out; }
-        
-        @keyframes subtleCardPulse {
-            0%, 100% { border-color: var(--glass-border); }
-            50% { border-color: rgba(255,255,255,0.25); box-shadow: 0 0 25px rgba(2,132,199,0.05); }
-        }
 
-        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; }
+        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; }
         .editorial-title { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; text-transform: uppercase; }
         .exhaustive-body-copy { font-size: 0.95rem; line-height: 1.85; color: var(--text-body); }
         .exhaustive-body-copy p { margin-bottom: 1.5rem; }
 
-        footer { background-color: #020306; color: #475569; padding: 4rem; border-top: 1px solid var(--glass-border); font-family: var(--font-mono); font-size: 0.8rem; }
-        .footer-grid { display: grid; grid-template-columns: 2fr repeat(2, 1fr); gap: 4rem; max-width: 1400px; margin: 0 auto; }
+        footer { background-color: #010204; color: #475569; padding: 6rem 4rem 3rem 4rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 4; }
+        .footer-grid-wrapper { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 4rem; max-width: 1500px; margin: 0 auto 4rem auto; }
+        .footer-grid-wrapper h3 { font-family: var(--font-mono); font-size: 1.3rem; color: #ffffff; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .footer-grid-wrapper h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; transition: color 0.4s; }
+        .footer-grid-wrapper ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+        .footer-grid-wrapper a { text-decoration: none; color: #64748b; font-size: 0.88rem; transition: color 0.3s; }
+        .footer-grid-wrapper a:hover { color: white; }
+        .footer-baseline-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; max-width: 1500px; margin: 0 auto; }
 
         @media (max-width: 1100px) {
             .col-8, .col-4, .col-6 { grid-column: span 12; }
-            header { width: calc(100% - 2rem); padding: 0.8rem 1.5rem; top: 1rem; }
-            main { padding: 9rem 1.5rem 2rem 1.5rem; }
+            header { width: calc(100% - 1.5rem); padding: 0.6rem 1.2rem; top: 1rem; border-radius: 30px; flex-direction: column; gap: 1rem; }
+            .nav-dock-cluster { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+            nav { width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .nav-tab-node { padding: 0.5rem 1rem; font-size: 0.75rem; }
+            .brightness-module { border-left: none; margin-left: 0; padding-left: 0; }
+            .color-palette-tray { border-left: none; margin-left: 0; padding-left: 0; }
+            main { padding: 12rem 1.5rem 4rem 1.5rem; }
             .bento-card-lux { padding: 2.5rem 1.5rem; }
+            .footer-grid-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="cursor-core"></div>
-    <div id="cursor-aura"></div>
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-ring"></div>
+    <div class="simple-bg-grid"></div>
 
-    <div id="vortex-preloader">
-        <div class="loader-viewport">
-            <div class="loader-word" id="lw1">welcome</div>
-            <div class="loader-word" id="lw2">needh</div>
-        </div>
-        <div class="loader-track"><div class="loader-fill" id="l-fill"></div></div>
-    </div>
-
-    <header>
-        <a href="index.html" class="agency-brand ui-bind">VORTEX<span>_</span></a>
+    <header class="ui-bind">
+        <a href="index.html" class="agency-brand">VORTEX<span>_</span></a>
         <div class="nav-dock-cluster">
             <nav style="display: flex; gap: 0.25rem;">
-                <a href="index.html" class="nav-tab-node ui-bind">INDEX</a>
-                <a href="about.html" class="nav-tab-node tab-active ui-bind">ABOUT</a>
-                <a href="services.html" class="nav-tab-node ui-bind">SERVICES</a>
-                <a href="portfolio.html" class="nav-tab-node ui-bind">PORTFOLIO</a>
-                <a href="contact.html" class="nav-tab-node ui-bind">CONTACT</a>
+                <a href="index.html" class="nav-tab-node">INDEX</a>
+                <a href="about.html" class="nav-tab-node tab-active">ABOUT</a>
+                <a href="services.html" class="nav-tab-node">SERVICES</a>
+                <a href="portfolio.html" class="nav-tab-node">PORTFOLIO</a>
+                <a href="contact.html" class="nav-tab-node">CONTACT</a>
             </nav>
+            
+            <div class="brightness-module">
+                <label for="vortex-lum-range">LUM</label>
+                <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
+            </div>
+
+            <div class="color-palette-tray">
+                <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
+                <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
+                <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
+                <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
+                <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+            </div>
         </div>
     </header>
 
     <main>
-        <div class="bento-matrix">
-            <div class="bento-card-lux col-12 hover-pulse" style="background: transparent; border: none; box-shadow: none; padding-left: 0;">
-                <span class="meta-context-label">01 // Operational Ideology Matrix</span>
-                <h1 class="editorial-title" style="font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1;">Our Vision & Operational Story</h1>
-            </div>
-
+        <div class="stage-canvas">
+            
+            <!-- CREATIVE PROFILE EXECUTION -->
             <div class="bento-card-lux col-8 hover-lift">
-                <span class="meta-context-label">The Blueprint Architecture</span>
-                <p class="dense-exposition-statement" style="font-size:1.25rem; line-height:1.6; margin-bottom:1.5rem;">Vortex operates strictly to clean up structural web configurations, preventing user-end performance lag across heavy database setups.</p>
+                <span class="meta-context-label">EXEC_DIRECTIVE // IDENTITY NODE</span>
+                <h2 class="editorial-title">Farhan</h2>
                 <div class="exhaustive-body-copy">
-                    <p>Our production team bypasses template patterns entirely to code tailored scripting systems from scratch. By maintaining direct visual hierarchy controls, our installations handle immense querying spikes natively without causing frame-rate lag or server errors, protecting structural security borders across high-end business applications.</p>
+                    <p>Operating as the core asset engineer of the Vortex networks. Farhan leads professional video formatting setups, motion graphics choreography, and clean deployment dashboard frameworks from the ground up. By constructing vanilla scripting lines, our architecture skips heavy open-source modules to handle direct layouts seamlessly.</p>
+                    <p>We work tightly around visual realism and structural fidelity. No artificial face smoothing templates or altered calculation filters are authorized inside our image registries, preserving raw layout contrast perfectly across high-definition viewports.</p>
                 </div>
             </div>
 
-            <div class="bento-card-lux col-4 hover-tilt" style="background: var(--text-lead); color: var(--bg-base); display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="bento-card-lux col-4 hover-tilt" style="display:flex; flex-direction:column; justify-content:space-between;">
                 <div>
-                    <span class="meta-context-label" style="color:var(--sapphire-core);">Verified Status Log</span>
-                    <h4 style="font-family:var(--font-mono); font-size:1.25rem; text-transform:uppercase; margin-top:1rem;">Laboratory Benchmarks</h4>
+                    <span class="meta-context-label">OVERVIEW // COMPILATION</span>
+                    <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.3rem; margin-bottom:1rem;">Native Scope</h3>
+                    <p class="exhaustive-body-copy" style="font-size:0.9rem;">Vanilla coding stack environments engineered safely without unoptimized third-party latency boundaries.</p>
                 </div>
-                <div style="font-family:var(--font-mono); font-size:0.85rem; line-height:1.8; opacity:0.85;">
-                    <p>&gt; Core Uptime: 99.99% Certified</p>
-                    <p>&gt; Return Latency: 0.04ms Baseline</p>
-                    <p>&gt; Screen Easing: 120Hz Fluid Synchronized</p>
+                <div style="border-top:1px solid var(--glass-border); padding-top:1.5rem;">
+                    <div class="telemetry-stat-value">100%</div>
+                    <div class="telemetry-stat-label">NATIVE LOCKED</div>
                 </div>
             </div>
 
-            <div class="bento-card-lux col-6 hover-tilt">
-                <span class="meta-context-label">Project Engineering Director</span>
-                <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.4rem; margin-bottom:0.5rem;">Farhan</h3>
-                <span style="font-size:0.75rem; color:var(--sapphire-core); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-family:var(--font-mono);">Systems Architect</span>
-                <p class="exhaustive-body-copy" style="margin-top:1.5rem;">Directing layout structural logic and cross-platform alignment controls. Farhan coordinates front-end elements cleanly to secure absolute typography balancing and total database scaling authority across all active business network nodes.</p>
+            <div class="bento-card-lux col-12 hover-lift">
+                <span class="meta-context-label">03 // Global Execution Framework</span>
+                <h2 class="editorial-title">Central Lab Parameters & Infrastructure</h2>
+                <div class="exhaustive-body-copy" style="columns: 2; gap: 3rem;">
+                    <p>Vortex establishes technical layouts targeted strictly around pipeline velocity. From organizing un-bloated node directories on personal domains down to engineering regional awareness blocks like NyayaSetu—our codebase treats core database transaction speed as an absolute priority.</p>
+                    <p>Every interface section we structure reflows flawlessly at 120Hz thresholds without overlapping hazards, offering flawless corporate presentation mapping models safely.</p>
+                </div>
             </div>
 
-            <div class="bento-card-lux col-6 hover-pulse" style="display:flex; flex-direction:column; justify-content:center; text-align:center; border-color: rgba(2,132,199,0.15);">
-                <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.4rem; margin-bottom:1rem;">Initialize Integration</h3>
-                <p class="exhaustive-body-copy" style="margin-bottom:2rem;">Connect with our laboratory group to evaluate active application maps.</p>
-                <a href="contact.html" class="nav-tab-node ui-bind" style="background:var(--sapphire-gradient); color:white; padding:1rem 2rem; align-self:center; border-radius:4px; text-decoration:none; font-weight:700; font-size:0.85rem; box-shadow:0 10px 20px rgba(0,240,255,0.15);">SSH / Connect Core</a>
-            </div>
         </div>
     </main>
 
     <footer>
-        <div class="footer-grid">
+        <div class="footer-grid-wrapper">
             <div>
-                <h3>VORTEX_SYSTEMS</h3>
-                <p style="margin-top:1rem; line-height:1.6; color:var(--text-body);">Designing premium corporate software platforms, scalable automation pipelines, and elegant user workspaces for industry leaders.</p>
+                <h3>VORTEX<span>.</span></h3>
+                <p style="line-height: 1.75; font-size:0.88rem;">Architecting high-fidelity digital infrastructure assemblies, optimized ledger configurations, and fluid user workspaces for modern industry leaders.</p>
             </div>
             <div>
                 <h4>System Maps</h4>
-                <p style="line-height:2; color:var(--text-body);">cat /index<br>cat /about<br>sh /capabilities</p>
+                <ul>
+                    <li><a href="index.html">Index Matrix</a></li>
+                    <li><a href="about.html">Our Vision</a></li>
+                    <li><a href="services.html">Disciplines</a></li>
+                </ul>
             </div>
             <div>
-                <h4>Telemetry Summary</h4>
-                <p style="line-height:2; color:var(--text-body);">Platform Class: Vanilla Core<br>Uptime: 100% Secure<br>&copy; 2026 Vortex Systems Ltd.</p>
+                <h4>Telemetry Logs</h4>
+                <ul>
+                    <li><a href="portfolio.html">Case Registry</a></li>
+                    <li><a href="contact.html">Connect Core</a></li>
+                </ul>
             </div>
+            <div>
+                <h4>Lab Nodes</h4>
+                <p style="line-height:1.7; font-size:0.85rem; color:#475569; font-family:var(--font-mono);">Vortex Engineering Labs<br>Corporate Block Alpha, CyberCity<br>Gurugram, HR, India</p>
+            </div>
+        </div>
+        <div class="footer-baseline-bar">
+            <span>&copy; 2026 Vortex Systems Ltd. Core application parameters compiled securely across global territories.</span>
         </div>
     </footer>
 
+    <!-- POINTER PHYSICS AND LOCALSTORAGE STATE RETRIEVAL ENGINE -->
     <script>
-        const lw1 = document.getElementById('lw1'); const lw2 = document.getElementById('lw2');
-        const lFill = document.getElementById('l-fill'); const preloader = document.getElementById('vortex-preloader');
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => lFill.style.width = '100%', 100);
-            setTimeout(() => lw1.classList.add('active'), 250);
-            setTimeout(() => { lw1.classList.remove('active'); lw1.classList.add('exit'); }, 1150);
-            setTimeout(() => lw2.classList.add('active'), 1350);
-            setTimeout(() => { preloader.style.transform = 'translateY(-100vh)'; revealGridPanels(); }, 2400);
-        });
-        function revealGridPanels() {
-            document.querySelectorAll('.bento-card-lux').forEach((p, i) => { setTimeout(() => p.classList.add('reveal-visible'), i * 120); });
-        }
-        let mX = 0, mY = 0, aX = 0, aY = 0;
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        const cursorRing = document.getElementById('custom-cursor-ring');
+        let mX = 0, mY = 0, ringX = 0, ringY = 0;
+
         window.addEventListener('mousemove', (e) => {
             mX = e.clientX; mY = e.clientY;
-            document.getElementById('cursor-core').style.left = mX + 'px';
-            document.getElementById('cursor-core').style.top = mY + 'px';
+            cursorDot.style.left = mX + 'px'; cursorDot.style.top = mY + 'px';
         });
-        function auraLoop() {
-            aX += (mX - aX) * 0.15; aY += (mY - aY) * 0.15;
-            document.getElementById('cursor-aura').style.left = aX + 'px';
-            document.getElementById('cursor-aura').style.top = aY + 'px';
-            requestAnimationFrame(auraLoop);
+
+        function processCursorAuraPhysics() {
+            ringX += (mX - ringX) * 0.12; ringY += (mY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(processCursorAuraPhysics);
         }
-        auraLoop();
-        document.querySelectorAll('.ui-bind, .bento-card-lux, a, button').forEach(t => {
-            t.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
-            t.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        processCursorAuraPhysics();
+
+        function bindCursorInteractions() {
+            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux, input, textarea').forEach(node => {
+                node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
+                node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
+            });
+        }
+        bindCursorInteractions();
+
+        /* --- THE STATE STORAGE MANAGEMENT --- */
+        function adjustGlobalLuminance(value) {
+            document.documentElement.style.setProperty('--vortex-brightness', value + '%');
+            localStorage.setItem('vortex-saved-brightness', value);
+        }
+
+        function updateGlobalPalette(hexString) {
+            document.documentElement.style.setProperty('--sapphire-core', hexString);
+            document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${hexString} 100%)`);
+            localStorage.setItem('vortex-saved-palette', hexString);
+        }
+
+        function applyStoredSystemStates() {
+            const savedBrightness = localStorage.getItem('vortex-saved-brightness');
+            if(savedBrightness) {
+                document.getElementById('vortex-lum-range').value = savedBrightness;
+                document.documentElement.style.setProperty('--vortex-brightness', savedBrightness + '%');
+            }
+            const savedPalette = localStorage.getItem('vortex-saved-palette');
+            if(savedPalette) {
+                document.documentElement.style.setProperty('--sapphire-core', savedPalette);
+                document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${savedPalette} 100%)`);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            applyStoredSystemStates();
+            document.querySelectorAll('.bento-card-lux').forEach((p, i) => { setTimeout(() => p.classList.add('reveal-visible'), i * 120); });
         });
     </script>
 </body>
