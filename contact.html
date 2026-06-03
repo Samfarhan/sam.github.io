@@ -37,24 +37,26 @@
             -webkit-font-smoothing: antialiased; 
             overflow-x: hidden;
             filter: brightness(var(--vortex-brightness));
+            cursor: none;
+            position: relative;
         }
 
-        /* --- STYLISH INSANELY CLEAN CUSTOM POINTER --- */
-        body { cursor: none; } 
-        
+        /* --- DECOUPLED UNLAGGED TRACKING CURSOR (SCROLL PROOF) --- */
         #custom-cursor-dot {
-            position: fixed; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
-            pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); mix-blend-mode: difference; 
+            position: absolute; top: 0; left: 0; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
+            pointer-events: none; z-index: 100000; mix-blend-mode: difference; will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
         }
 
         #custom-cursor-ring {
-            position: fixed; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
-            pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); background: transparent;
-            transition: transform 0.3s var(--ease-schulz), width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
+            position: absolute; top: 0; left: 0; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+            pointer-events: none; z-index: 99999; background: transparent; will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
+            transition: width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
         }
 
         body.cursor-hovering #custom-cursor-dot { width: 12px; height: 12px; background: var(--sapphire-core); mix-blend-mode: normal; }
-        body.cursor-hovering #custom-cursor-ring { width: 48px; height: 48px; border-color: var(--sapphire-core); transform: translate(-50%, -50%) scale(1.1); }
+        body.cursor-hovering #custom-cursor-ring { width: 48px; height: 48px; border-color: var(--sapphire-core); }
 
         @media (pointer: coarse) {
             body { cursor: auto; }
@@ -70,7 +72,7 @@
             background-size: 60px 60px; background-position: center top; pointer-events: none;
         }
 
-        /* --- SYSTEM NAV BAR ASSEMBLY --- */
+        /* --- FLOATING NAVIGATION BAR --- */
         header {
             position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
             width: calc(100% - 4rem); max-width: 1400px; padding: 0.8rem 2.5rem;
@@ -85,6 +87,7 @@
         .agency-brand span { color: var(--sapphire-core); transition: color 0.4s; }
         
         .nav-dock-cluster { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-tab-links-wrapper { display: flex; gap: 0.25rem; }
         .nav-tab-node { text-decoration: none; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
         .nav-tab-node.tab-active, .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.02); }
 
@@ -98,6 +101,10 @@
         .swatch-cyan { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
         .swatch-purple { background: #a855f7; } .swatch-emerald { background: #10b981; } .swatch-crimson { background: #ff0055; } .swatch-gold { background: #f59e0b; }
 
+        /* Premium Slidout Mobile Menu Elements */
+        .mobile-menu-trigger-btn { display: none; background: transparent; border: none; cursor: pointer; flex-direction: column; gap: 6px; padding: 0.5rem; z-index: 10001; }
+        .mobile-bar-node { width: 24px; height: 2px; background-color: var(--text-lead); transition: transform 0.4s var(--ease-schulz), opacity 0.3s; }
+
         /* --- CONTENT STRUCT PIPELINE --- */
         main { max-width: 1600px; margin: 0 auto; padding: 10rem 4rem 6rem 4rem; position: relative; z-index: 3; }
         .stage-canvas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.75rem; width: 100%; }
@@ -108,19 +115,19 @@
         .bento-card-lux { 
             background-color: var(--surface-card); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); 
             border: 1px solid var(--glass-border); border-radius: 20px; padding: 4rem; position: relative; overflow: hidden; 
-            box-shadow: var(--shadow-premium), var(--glass-inner-glow); opacity: 0; transform: translateY(40px);
-            transition: border-color 0.5s, transform 0.8s var(--ease-schulz), opacity 0.6s ease;
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow); opacity: 0; transform: translate3d(0, 30px, 0);
+            transition: border-color 0.5s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease; 
         }
-        .bento-card-lux.reveal-visible { opacity: 1; transform: translateY(0); }
+        .bento-card-lux.reveal-visible { opacity: 1; transform: translate3d(0,0,0); }
 
-        .hover-lift:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-6px); }
-        .hover-tilt:hover { transform: translateY(-4px) rotate(0.5deg); border-color: var(--sapphire-core); }
+        .hover-lift:hover { border-color: rgba(255, 255, 255, 0.2); transform: translate3d(0, -6px, 0); }
+        .hover-tilt:hover { transform: translate3d(0, -4px, 0) rotate(0.5deg); border-color: var(--sapphire-core); }
 
         .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; }
         .editorial-title { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; text-transform: uppercase; }
         .exhaustive-body-copy { font-size: 0.95rem; line-height: 1.85; color: var(--text-body); }
         
-        /* Premium Form Toggles */
+        /* Premium Form Elements */
         .lux-form-group { margin-bottom: 2rem; position: relative; }
         .lux-form-group label { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; transition: color 0.4s; }
         .lux-input {
@@ -136,11 +143,16 @@
             padding: 1.2rem 3rem; border-radius: 100px; text-decoration: none; border: none; box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.4);
             transition: transform 0.3s var(--ease-schulz), box-shadow 0.3s; cursor: none; margin-top: 1rem; width: 100%;
         }
-        .vortex-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.6); }
+        .vortex-cta-btn:hover { transform: translate3d(0, -2px, 0); box-shadow: 0 15px 35px -5px rgba(0, 240, 255, 0.6); }
 
         .registry-data-sheet { width: 100%; border-collapse: collapse; text-align: left; margin-top: 1rem; }
         .registry-data-sheet th { font-size: 0.72rem; text-transform: uppercase; color: var(--text-body); padding: 1.2rem; border-bottom: 1px solid var(--glass-border); letter-spacing: 0.1em; }
         .registry-data-sheet td { padding: 1.6rem 1.2rem; border-bottom: 1px solid var(--glass-border); color: var(--text-body); font-size: 0.9rem; }
+        .registry-data-sheet a { color: var(--sapphire-core); text-decoration: none; transition: opacity 0.3s; }
+        .registry-data-sheet a:hover { opacity: 0.8; }
+
+        .telemetry-stat-value { font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700; color: var(--text-lead); line-height: 1; margin-bottom: 0.5rem; }
+        .telemetry-stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-body); text-transform: uppercase; letter-spacing: 0.15em; }
 
         footer { background-color: #010204; color: #475569; padding: 6rem 4rem 3rem 4rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 4; }
         .footer-grid-wrapper { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 4rem; max-width: 1500px; margin: 0 auto 4rem auto; }
@@ -151,15 +163,31 @@
         .footer-grid-wrapper a:hover { color: white; }
         .footer-baseline-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; max-width: 1500px; margin: 0 auto; }
 
+        /* --- RESPONSIVE MOBILE HANDLERS --- */
         @media (max-width: 1100px) {
             .col-8, .col-4, .col-6 { grid-column: span 12; }
-            header { width: calc(100% - 1.5rem); padding: 0.6rem 1.2rem; top: 1rem; border-radius: 30px; flex-direction: column; gap: 1rem; }
-            .nav-dock-cluster { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-            nav { width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .nav-tab-node { padding: 0.5rem 1rem; font-size: 0.75rem; }
-            .brightness-module { border-left: none; margin-left: 0; padding-left: 0; }
-            .color-palette-tray { border-left: none; margin-left: 0; padding-left: 0; }
-            main { padding: 12rem 1.5rem 4rem 1.5rem; }
+            header { width: calc(100% - 2rem); padding: 0.8rem 1.8rem; top: 1rem; border-radius: 40px; }
+            
+            .mobile-menu-trigger-btn { display: flex; }
+            
+            .nav-tab-links-wrapper {
+                position: fixed; top: 0; right: 0; height: 100vh; width: 280px;
+                background: rgba(3, 5, 9, 0.96); backdrop-filter: blur(30px);
+                border-left: 1px solid var(--glass-border);
+                flex-direction: column; padding: 8rem 2rem 2rem 2rem; gap: 1rem;
+                transform: translate3d(100%, 0, 0); transition: transform 0.5s var(--ease-schulz);
+                z-index: 9999;
+            }
+            header.menu-expanded .nav-tab-links-wrapper { transform: translate3d(0, 0, 0); }
+            header.menu-expanded .mobile-bar-node:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            header.menu-expanded .mobile-bar-node:nth-child(2) { opacity: 0; }
+            header.menu-expanded .mobile-bar-node:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .nav-tab-node { width: 100%; text-align: left; padding: 1rem; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.02); }
+            .brightness-module { margin-left: 0; padding-left: 0; border-left: none; margin-top: 1rem; }
+            .color-palette-tray { margin-left: 0; padding-left: 0; border-left: none; margin-top: 1rem; }
+            
+            main { padding: 8rem 1.5rem 4rem 1.5rem; }
             .bento-card-lux { padding: 2.5rem 1.5rem; }
             .footer-grid-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
         }
@@ -171,29 +199,35 @@
     <div id="custom-cursor-ring"></div>
     <div class="simple-bg-grid"></div>
 
-    <header class="ui-bind">
+    <header>
         <a href="index.html" class="agency-brand">VORTEX<span>_</span></a>
         <div class="nav-dock-cluster">
-            <nav style="display: flex; gap: 0.25rem;">
+            <div class="nav-tab-links-wrapper">
                 <a href="index.html" class="nav-tab-node">INDEX</a>
                 <a href="about.html" class="nav-tab-node">ABOUT</a>
                 <a href="services.html" class="nav-tab-node">SERVICES</a>
                 <a href="portfolio.html" class="nav-tab-node">PORTFOLIO</a>
                 <a href="contact.html" class="nav-tab-node tab-active">CONTACT</a>
-            </nav>
-            
-            <div class="brightness-module">
-                <label for="vortex-lum-range">LUM</label>
-                <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
-            </div>
+                
+                <div class="brightness-module">
+                    <label for="vortex-lum-range">LUM</label>
+                    <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
+                </div>
 
-            <div class="color-palette-tray">
-                <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
-                <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
-                <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
-                <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
-                <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+                <div class="color-palette-tray">
+                    <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
+                    <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
+                    <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
+                    <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
+                    <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+                </div>
             </div>
+            
+            <button class="mobile-menu-trigger-btn" onclick="document.querySelector('header').classList.toggle('menu-expanded')">
+                <div class="mobile-bar-node"></div>
+                <div class="mobile-bar-node"></div>
+                <div class="mobile-bar-node"></div>
+            </button>
         </div>
     </header>
 
@@ -226,12 +260,13 @@
             <!-- LAB TELEMETRY PROFILE NODE -->
             <div class="bento-card-lux col-4 hover-tilt" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
-                    <span class="meta-context-label">LAB_NODES // CENTRAL SPEC</span>
-                    <h3 style="font-family: var(--font-mono); text-transform: uppercase; font-size: 1.4rem; margin-bottom: 1.5rem;">Operational Headquarters</h3>
-                    <div class="exhaustive-body-copy" style="font-size: 0.9rem; line-height: 2;">
-                        <p style="margin-bottom: 1rem;"><strong>Location:</strong> Corporate Block Alpha,<br>CyberCity, Gurugram, HR, India</p>
-                        <p style="margin-bottom: 1rem;"><strong>Mainframe Domain:</strong> samvortex.in</p>
-                        <p><strong>System Blueprint Flags:</strong> No facial alteration calculations or beauty modifications allowed.</p>
+                    <span class="meta-context-label">LAB_NODES // DIGITAL NODE DIRECTORY</span>
+                    <h3 style="font-family: var(--font-mono); text-transform: uppercase; font-size: 1.4rem; margin-bottom: 1.5rem;">Verified Telemetry</h3>
+                    <div class="exhaustive-body-copy" style="font-size: 0.95rem; line-height: 2.2;">
+                        <p style="margin-bottom: 1rem;"><strong>Mainframe Domain:</strong> <a href="http://samvortex.in">samvortex.in</a></p>
+                        <p style="margin-bottom: 1rem;"><strong>Instagram Access:</strong> <a href="https://instagram.com/kyntherious_" target="_blank">@kyntherious_</a></p>
+                        <p style="margin-bottom: 1rem;"><strong>WhatsApp Business:</strong> <a href="https://wa.me/19394441007" target="_blank">+1 939 444 1007</a></p>
+                        <p style="font-size:0.85rem; opacity:0.6; border-top:1px solid rgba(255,255,255,0.05); padding-top:1rem; margin-top:1rem;">System Core: No facial alterations or unoptimized smoothing layers applied.</p>
                     </div>
                 </div>
                 
@@ -304,31 +339,41 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE ACCELERATED CONTROLLERS WITH STORAGE HOOKS -->
+    <!-- SCROLL-PROOF ABSOLUTE COORDINATE POINTER PHYSICS ENGINE -->
     <script>
-        const cursorDot = document.getElementById('custom-cursor-dot');
-        const cursorRing = document.getElementById('custom-cursor-ring');
-        let mX = 0, mY = 0, ringX = 0, ringY = 0;
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        let ringTargetX = 0, ringTargetY = 0, ringCurrentX = 0, ringCurrentY = 0;
 
+        const dotNode = document.getElementById('custom-cursor-dot');
+        const ringNode = document.getElementById('custom-cursor-ring');
+
+        /* Tracks global position using pageX/pageY instead of viewport clientX/clientY */
         window.addEventListener('mousemove', (e) => {
-            mX = e.clientX; mY = e.clientY;
-            cursorDot.style.left = mX + 'px'; cursorDot.style.top = mY + 'px';
+            targetX = e.pageX;
+            targetY = e.pageY;
+            ringTargetX = e.pageX;
+            ringTargetY = e.pageY;
         });
 
-        function processCursorAuraPhysics() {
-            ringX += (mX - ringX) * 0.12; ringY += (mY - ringY) * 0.12;
-            cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
-            requestAnimationFrame(processCursorAuraPhysics);
+        function updateCursorFramePhysics() {
+            currentX += (targetX - currentX) * 0.42;
+            currentY += (targetY - currentY) * 0.42;
+            if(dotNode) dotNode.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+            ringCurrentX += (ringTargetX - ringCurrentX) * 0.15;
+            ringCurrentY += (ringTargetY - ringCurrentY) * 0.15;
+            if(ringNode) ringNode.style.transform = `translate3d(${ringCurrentX}px, ${ringCurrentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+            requestAnimationFrame(updateCursorFramePhysics);
         }
-        processCursorAuraPhysics();
+        updateCursorFramePhysics();
 
         function bindCursorInteractions() {
-            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux, input, textarea').forEach(node => {
+            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux, input, textarea, canvas').forEach(node => {
                 node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
                 node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
             });
         }
-        bindCursorInteractions();
 
         /* --- THE STATE STORAGE MANAGEMENT --- */
         function adjustGlobalLuminance(value) {
@@ -340,7 +385,7 @@
             document.documentElement.style.setProperty('--sapphire-core', hexString);
             document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${hexString} 100%)`);
             localStorage.setItem('vortex-saved-palette', hexString);
-            document.querySelectorAll('.meta-context-label, .lux-form-group label').forEach(el => el.style.color = hexString);
+            document.querySelectorAll('.meta-context-label, .lux-form-group label, .registry-data-sheet a, .exhaustive-body-copy a').forEach(el => el.style.color = hexString);
         }
 
         function applyStoredSystemStates() {
@@ -354,13 +399,14 @@
                 document.documentElement.style.setProperty('--sapphire-core', savedPalette);
                 document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${savedPalette} 100%)`);
                 setTimeout(() => {
-                    document.querySelectorAll('.meta-context-label, .lux-form-group label').forEach(el => el.style.color = savedPalette);
+                    document.querySelectorAll('.meta-context-label, .lux-form-group label, .registry-data-sheet a, .exhaustive-body-copy a').forEach(el => el.style.color = savedPalette);
                 }, 50);
             }
         }
 
         window.addEventListener('load', () => {
             applyStoredSystemStates();
+            bindCursorInteractions();
             document.querySelectorAll('.bento-card-lux').forEach((p, i) => { setTimeout(() => p.classList.add('reveal-visible'), i * 120); });
         });
     </script>
