@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disciplines & Capabilities — VORTEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #f8fafc;
+            --surface-card: #ffffff;
+            --text-lead: #0f172a;
+            --text-body: #475569;
+            --sapphire-core: #0284c7;
+            --sapphire-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+            --border-hairline: rgba(15, 23, 42, 0.06);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --ease-schulz: cubic-bezier(0.215, 0.61, 0.355, 1);
+            --shadow-premium: 0 20px 40px -15px rgba(15, 19, 42, 0.04);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-base); color: var(--text-lead); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 4rem;
+            display: flex; justify-content: space-between; align-items: center; z-index: 10000;
+            background: rgba(248, 250, 252, 0.85); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border-hairline);
+        }
+        .brand { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; text-transform: uppercase; text-decoration: none; color: var(--text-lead); }
+        .brand span { color: var(--sapphire-core); }
+        nav { display: flex; background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-hairline); padding: 0.3rem; border-radius: 100px; gap: 0.15rem; }
+        .nav-link { text-decoration: none; font-size: 0.8rem; font-weight: 600; color: var(--text-body); padding: 0.5rem 1.4rem; border-radius: 100px; transition: all 0.4s var(--ease-schulz); }
+        .nav-link.active, .nav-link:hover { color: var(--text-lead); background: var(--surface-card); box-shadow: 0 4px 10px rgba(15, 19, 42, 0.03); }
+
+        main { max-width: 1600px; margin: 0 auto; padding: 11rem 4rem 4rem 4rem; }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; width: 100%; }
+        .col-12 { grid-column: span 12; } .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-6 { grid-column: span 6; }
+        
+        .bento-card { background-color: var(--surface-card); border: 1px solid var(--border-hairline); border-radius: 16px; padding: 3.5rem; box-shadow: var(--shadow-premium); }
+        .section-tag font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; }
+        .hero-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 5.5vw, 4.8rem); line-height: 1.05; letter-spacing: -0.04em; color: var(--text-lead); }
+        
+        .body-copy { font-size: 0.95rem; line-height: 1.8; color: var(--text-body); }
+        .body-copy p { margin-bottom: 1.5rem; }
+
+        footer { background-color: var(--text-lead); color: #94a3b8; padding: 6rem 4rem 3rem 4rem; margin-top: 6rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 4rem; max-width: 1400px; margin: 0 auto 4rem auto; }
+        .footer-grid h3 { color: white; font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1rem; }
+        .footer-grid h4 { color: white; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+        .footer-grid ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+        .footer-grid a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+        .footer-base { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.8rem; max-width: 1500px; margin: 0 auto; }
+
+        @media (max-width: 1100px) { .col-8, .col-4, .col-6 { grid-column: span 12; } header { padding: 1.2rem 2rem; } main { padding: 8rem 2rem 2rem 2rem; } .bento-card { padding: 2rem; } .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand">VORTEX<span>.</span></a>
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="about.html" class="nav-link">ABOUT</a>
+            <a href="services.html" class="nav-link active">SERVICES</a>
+            <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="bento-grid">
+            <div class="bento-card col-12" style="background: transparent; border: none; box-shadow: none; padding-left: 0;">
+                <span class="section-tag">02 // Operational Capabilities</span>
+                <h1 class="hero-title">Core Engineering Disciplines</h1>
+            </div>
+
+            <!-- CARD 1 -->
+            <div class="bento-card col-8">
+                <h3 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:1rem;">Enterprise Software Architecture</h3>
+                <p class="body-copy">We structure primary enterprise database arrays to handle intensive global interactions smoothly. By utilizing pure script routines and isolated styling definitions, our core systems secure fast computational runtimes, keeping your visual workspaces active and functional during continuous production loads.</p>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="bento-card col-4" style="background: var(--bg-base);">
+                <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1rem;">Neural Indexing</h3>
+                <p class="body-copy" style="font-size:0.88rem;">Private automated software layers parsing multi-tiered database files with complete alignment safety, protecting layout views from system lag bugs entirely.</p>
+            </div>
+
+            <!-- INTEGRATED PRICING MAP -->
+            <div class="bento-card col-6" style="border-color: rgba(2, 132, 199, 0.15);">
+                <span class="section-tag">Tier 01 // System Audit</span>
+                <h4 style="font-family:var(--font-display); font-size:2rem; margin:1rem 0;">$24,500</h4>
+                <p class="body-copy">Detailed performance scanning and refactoring of active database structures, removing application latency issues and upgrading front-end visual elements natively.</p>
+            </div>
+
+            <div class="bento-card col-6" style="border-color: var(--sapphire-core);">
+                <span class="section-tag">Tier 02 // Core Modernization</span>
+                <h4 style="font-family:var(--font-display); font-size:2rem; margin:1rem 0;">$48,500</h4>
+                <p class="body-copy">Complete transition of legacy central frameworks into highly resilient cloud containers, incorporating custom data intelligence pipelines and anti-aliased cross-platform code layers.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>VORTEX<span>.</span></h3>
+                <p style="font-size: 0.9rem; line-height: 1.7; color:#94a3b8;">Forging high-fidelity corporate software solutions, scalable automation pipelines, and elegant user workspaces for modern industry leaders.</p>
+            </div>
+            <div>
+                <h4>Framework Map</h4>
+                <ul>
+                    <li><a href="index.html">Index Matrix</a></li>
+                    <li><a href="about.html">Our Vision</a></li>
+                    <li><a href="services.html">Disciplines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>System Logs</h4>
+                <ul>
+                    <li><a href="portfolio.html">Case Registry</a></li>
+                    <li><a href="contact.html">Connect Core</a></li>
+                    <li><a href="404.html">System Error</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Lab Nodes</h4>
+                <p style="font-size:0.85rem; line-height:1.6;">Vortex Engineering Labs<br>Corporate Block Alpha, CyberCity<br>Gurugram, HR, India</p>
+            </div>
+        </div>
+        <div class="footer-base">
+            <div>&copy; 2026 Vortex Systems Ltd. All rights reserved across international territories.</div>
+            <div>Monolithic Architecture Platform v26.4</div>
+        </div>
+    </footer>
+
+</body>
+</html>

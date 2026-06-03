@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VORTEX SYSTEM MASTER MATRIX // PRODUCTION WORKSPACE</title>
+    
+    <!-- Premium Typography Clusters -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- LUXURY SYSTEM VARIABLES --- */
+        :root {
+            --bg-base: #030509;           
+            --surface-card: rgba(10, 18, 36, 0.45); 
+            --text-lead: #ffffff;
+            --text-body: #94a3b8;
+            --sapphire-core: #00f0ff;     
+            --sapphire-gradient: linear-gradient(135deg, #0284c7 0%, #00f0ff 100%);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'Space Grotesk', sans-serif;
+            --ease-schulz: cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+        body { background-color: var(--bg-base); color: var(--text-lead); font-family: var(--font-display); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        /* --- STYLISH SIMPLE & INSANELY CLEAN CUSTOM GLASS POINTER SYSTEM --- */
+        body { cursor: none; } 
+        
+        #custom-cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--sapphire-core);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100000;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference; 
+            transition: width 0.2s var(--ease-schulz), height 0.2s var(--ease-schulz), background-color 0.3s;
+        }
+
+        #custom-cursor-ring {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            transition: transform 0.3s var(--ease-schulz), width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
+        }
+
+        /* Highly Stylish Expanded Hover States over UI Toggles */
+        body.cursor-hovering #custom-cursor-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--sapphire-core);
+            mix-blend-mode: normal;
+        }
+        body.cursor-hovering #custom-cursor-ring {
+            width: 48px;
+            height: 48px;
+            border-color: var(--sapphire-core);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Automatic Device Fallback: Disables elements completely on coarse touch viewports */
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+            #custom-cursor-dot, #custom-cursor-ring { display: none !important; }
+        }
+
+        /* --- STYLISH SIMPLE GEOMETRIC BACKGROUND GRID --- */
+        .simple-bg-grid {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: center top;
+            pointer-events: none;
+        }
+
+        #typography-physics-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: auto;
+        }
+
+        /* --- IMMERSIVE "WELCOME PEEPS" PRELOADER CORE --- */
+        #vortex-preloader {
+            position: fixed; inset: 0; background: #030509; z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 1.2s var(--ease-schulz);
+        }
+        .loader-viewport { height: 65px; overflow: hidden; position: relative; width: 100%; text-align: center; }
+        .loader-word { font-family: var(--font-mono); font-weight: 700; font-size: clamp(1.8rem, 5vw, 3.2rem); text-transform: uppercase; letter-spacing: -0.01em; position: absolute; width: 100%; color: #ffffff; opacity: 0; transform: translateY(50px); transition: transform 0.8s var(--ease-schulz), opacity 0.6s ease, filter 0.6s ease; filter: blur(8px); }
+        .loader-word.active { opacity: 1; transform: translateY(0); filter: blur(0px); }
+        .loader-word.exit { opacity: 0; transform: translateY(-50px); filter: blur(8px); }
+        .loader-track { width: 180px; height: 2px; background: rgba(255, 255, 255, 0.05); margin-top: 2rem; position: relative; border-radius: 10px; }
+        .loader-fill { position: absolute; height: 100%; width: 0%; background: var(--sapphire-core); box-shadow: 0 0 15px var(--sapphire-core); transition: width 2s cubic-bezier(0.1, 0.8, 0.1, 1); }
+
+        /* --- NAV HEAD CENTER --- */
+        header {
+            position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 4rem); max-width: 1400px; padding: 0.8rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center; z-index: 10000;
+            background: rgba(3, 5, 9, 0.6); backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border); border-radius: 12px;
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow);
+        }
+
+        .agency-brand { font-family: var(--font-mono); font-weight: 700; font-size: 1.25rem; text-transform: uppercase; text-decoration: none; color: var(--text-lead); }
+        .agency-brand span { color: var(--sapphire-core); transition: color 0.4s; }
+        
+        .nav-dock-cluster { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-tab-node { background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 4px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
+        .nav-tab-node.tab-active, .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.02); }
+
+        .color-palette-tray { display: flex; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
+        .swatch-node { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: transform 0.3s var(--ease-schulz); }
+        .swatch-node:hover { transform: scale(1.3); }
+        .swatch-cyan { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+        .swatch-purple { background: #a855f7; }
+        .swatch-emerald { background: #10b981; }
+        .swatch-crimson { background: #ff0055; }
+        .swatch-gold { background: #f59e0b; }
+
+        .hero-viewport-panel { height: 100vh; position: relative; width: 100%; border-bottom: 1px solid var(--glass-border); overflow: hidden; }
+
+        .scroll-down-indicator {
+            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-body);
+            letter-spacing: 0.2em; text-transform: uppercase; z-index: 5; opacity: 0.8;
+        }
+        .mouse-scroller { width: 22px; height: 36px; border: 2px solid var(--text-body); border-radius: 20px; position: relative; }
+        .mouse-wheel-dot { width: 4px; height: 8px; background: var(--sapphire-core); border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scrollerWeave 1.8s ease-in-out infinite; }
+        @keyframes scrollerWeave { 0% { top: 6px; opacity: 1; } 50% { top: 18px; opacity: 0.3; } 100% { top: 6px; opacity: 1; } }
+
+        /* --- LAYOUT PIPELINE STRUCT --- */
+        main { max-width: 1600px; margin: 0 auto; padding: 6rem 4rem; position: relative; z-index: 3; }
+        .stage-canvas { display: none; grid-template-columns: repeat(12, 1fr); gap: 1.75rem; width: 100%; }
+        .stage-canvas.canvas-active { display: grid; animation: paneEntrance 0.8s var(--ease-schulz) forwards; }
+        @keyframes paneEntrance { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .col-12 { grid-column: span 12; } .col-8 { grid-column: span 8; } 
+        .col-4 { grid-column: span 4; }  .col-6 { grid-column: span 6; }
+
+        .bento-card-lux { 
+            background-color: var(--surface-card); 
+            backdrop-filter: blur(25px) saturate(180%); 
+            -webkit-backdrop-filter: blur(25px) saturate(180%); 
+            border: 1px solid var(--glass-border); border-radius: 20px; 
+            padding: 4.5rem; position: relative; overflow: hidden; 
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow); 
+            opacity: 0; transform: translateY(40px);
+            transition: border-color 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease; 
+        }
+        .bento-card-lux.reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .hover-lift:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-6px); }
+        .hover-tilt:hover { transform: translateY(-4px) rotate(0.5deg); border-color: var(--sapphire-core); }
+        .hover-pulse:hover { animation: subtleCardPulse 2s infinite ease-in-out; }
+        
+        @keyframes subtleCardPulse {
+            0%, 100% { border-color: var(--glass-border); }
+            50% { border-color: rgba(255,255,255,0.25); box-shadow: 0 0 25px rgba(2,132,199,0.05); }
+        }
+
+        .plot-twist-pane { position: absolute; inset: 0; background: #060a12; color: white; padding: 4.5rem; display: flex; flex-direction: column; justify-content: center; transform: translateY(102%); transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1); z-index: 10; }
+        .bento-card-lux:hover .plot-twist-pane { transform: translateY(0); }
+        .plot-twist-heading { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--sapphire-core); margin-bottom: 1rem; text-transform: uppercase; }
+
+        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; }
+        .editorial-title { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .exhaustive-body-copy { font-size: 0.95rem; line-height: 1.85; color: var(--text-body); }
+        .exhaustive-body-copy p { margin-bottom: 1.5rem; }
+
+        .telemetry-stat-value { font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700; color: var(--text-lead); line-height: 1; margin-bottom: 0.5rem; }
+        .telemetry-stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-body); text-transform: uppercase; letter-spacing: 0.15em; }
+
+        .registry-data-sheet { width: 100%; border-collapse: collapse; text-align: left; margin-top: 1rem; }
+        .registry-data-sheet th { font-size: 0.72rem; text-transform: uppercase; color: var(--text-body); padding: 1.2rem; border-bottom: 1px solid var(--glass-border); letter-spacing: 0.1em; }
+        .registry-data-sheet td { padding: 1.6rem 1.2rem; border-bottom: 1px solid var(--glass-border); color: var(--text-body); }
+
+        footer { background-color: #020306; color: #475569; padding: 4rem; border-top: 1px solid var(--glass-border); font-family: var(--font-mono); font-size: 0.8rem; position: relative; z-index: 4; }
+        .footer-grid { display: grid; grid-template-columns: 2fr repeat(2, 1fr); gap: 4rem; max-width: 1400px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+    <!-- STYLIZED CUSTOM GLASS MOUSE POINTER ARTIFACTS -->
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-ring"></div>
+
+    <!-- ONE-TIME "WELCOME PEEPS" MATRIX PRELOADER INTERFACE -->
+    <div id="vortex-preloader">
+        <div class="loader-viewport">
+            <div class="loader-word" id="lw1">welcome</div>
+            <div class="loader-word" id="lw2">peeps</div>
+        </div>
+        <div class="loader-track"><div class="loader-fill" id="l-fill"></div></div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <div class="hero-viewport-panel">
+        <div class="simple-bg-grid"></div>
+        <canvas id="typography-physics-canvas"></canvas>
+        <div class="scroll-down-indicator"><div class="mouse-scroller"><div class="mouse-wheel-dot"></div></div><span style="margin-top:0.25rem;">Scroll Matrix</span></div>
+    </div>
+
+    <!-- SYSTEM FLOATING NAV BAR -->
+    <header class="ui-bind">
+        <a href="index.html" class="agency-brand">VORTEX<span>_</span></a>
+        <div class="nav-dock-cluster">
+            <nav style="display: flex; gap: 0.25rem;">
+                <button class="nav-tab-node tab-active" onclick="switchActiveStage('index', this)">INDEX</button>
+                <button class="nav-tab-node" onclick="switchActiveStage('about', this)">ABOUT</button>
+                <button class="nav-tab-node" onclick="switchActiveStage('services', this)">SERVICES</button>
+                <button class="nav-tab-node" onclick="switchActiveStage('contact', this)">CONTACT</button>
+            </nav>
+            
+            <div class="color-palette-tray">
+                <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
+                <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
+                <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
+                <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
+                <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT SYSTEM REPOSITORIES -->
+    <main>
+        
+        <!-- =================== CANVASES STAGE 1: HOME =================== -->
+        <div id="stage-index" class="stage-canvas canvas-active">
+            <!-- Low-poly illustration card synced from avatar blueprint -->
+            <div class="bento-card-lux col-4 hover-pulse">
+                <span class="meta-context-label">SYS_AVATAR // REPLICA.NODE</span>
+                <svg width="220" height="280" viewBox="0 0 220 280" style="filter: drop-shadow(0 10px 20px rgba(0,0,0,0.45)); overflow: visible;">
+                    <defs>
+                        <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#a855f7" />
+                            <stop offset="100%" stop-color="#ff0055" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="110" cy="130" r="90" fill="#334155" opacity="0.35" />
+                    <polygon points="40,140 110,30 180,100 160,160 110,130" fill="#090d16" />
+                    <polygon points="50,110 110,30 130,80 80,100" fill="#0f172a" />
+                    <polygon points="80,100 130,80 150,130 110,170" fill="#e2e8f0" opacity="0.85" />
+                    <polygon points="130,80 160,100 150,130" fill="#cbd5e1" opacity="0.7" />
+                    <polygon points="110,170 150,130 120,200 100,185" fill="url(#pinkGrad)" />
+                    <circle cx="95" cy="115" r="22" fill="#6366f1" />
+                    <circle cx="145" cy="122" r="20" fill="#4f46e5" />
+                    <polygon points="90,70 120,65 140,85 105,90" fill="#00f0ff" opacity="0.8" />
+                    <polygon points="20,240 100,185 120,200 200,250 110,270" fill="#1e293b" />
+                    <polygon points="40,200 100,185 70,240" fill="#475569" opacity="0.5" />
+                </svg>
+                <h4 style="font-family: var(--font-mono); font-size: 1.1rem; margin-top: 2rem; text-align:center;">Farhan</h4>
+                <span style="font-size: 0.75rem; color: var(--text-body); font-family: var(--font-mono); margin-top: 0.25rem; display:block; text-align:center;">Creative Lead</span>
+            </div>
+
+            <!-- CORE STATEMENT CONSOLE WITH HOVER-LIFT ANIMATION -->
+            <div class="bento-card-lux col-8 hover-lift">
+                <span class="meta-context-label">01 // Architectural Directives Matrix</span>
+                <h2 class="editorial-title">Systems Engineering Authority Matrix</h2>
+                <div class="exhaustive-body-copy">
+                    <p>Vortex breaks down open-source layout configurations to establish high-fidelity, customized digital spaces. By developing visual frameworks natively from scratch, our lab secures immaculate data processing speeds and heavy backend security maps capable of handling extreme enterprise concurrency requirements flawlessly.</p>
+                    <p>Our infrastructure builds are highly focused on spatial optimization. We completely avoid template overhead and unoptimized external scripts, allowing central web dashboards to load cleanly at 120Hz refresh rates across global office environments and handheld terminal nodes.</p>
+                </div>
+                <div class="plot-twist-pane">
+                    <div class="plot-twist-heading">[ Operational Data Decoupled ]</div>
+                    <p style="font-size:0.92rem; line-height:1.7; margin-bottom:1.5rem;"><strong>The Paradigm Shift:</strong> Custom pointer monitoring loops have decrypted internal cache parameters natively. System specifications verify that no face smoothing calculations or modifications are active, retaining absolute visual authority across your framework deployment node.</p>
+                    <span style="font-family:var(--font-code); font-size:0.72rem; opacity:0.6;">&gt; samvortex.in // Hardware security check status: secure.</span>
+                </div>
+            </div>
+
+            <!-- EXPANDED CONTENT DATA CELL WITH HOVER-TILT ANIMATION -->
+            <div class="bento-card-lux col-8 hover-tilt">
+                <span class="meta-context-label">02 // Comprehensive System Infrastructure Scope</span>
+                <h3 style="font-family: var(--font-mono); font-size: 1.4rem; margin-bottom: 1rem; text-transform: uppercase;">Infrastructure Modernization Parameters</h3>
+                <div class="exhaustive-body-copy">
+                    <p>Building high-density interface configurations requires precise database execution. Our systems are engineered to map backend endpoints safely, minimizing script compile crashes and shielding central server applications from memory overlap cycles. We ensure that interactive metrics remain fully stable under scaling requirements.</p>
+                    <p>Every layout constraint path is evaluated natively within independent file scopes. This guarantees that whether deploying advanced motion design modules or managing stat sheets, the terminal load vectors maintain balanced execution rates with zero layout overlap errors.</p>
+                </div>
+            </div>
+
+            <div class="bento-card-lux col-4 hover-lift" style="display: flex; flex-direction: column; justify-content: center;">
+                <span class="meta-context-label">03 // System Integrities</span>
+                <div style="margin-bottom: 1.5rem;"><div class="telemetry-stat-value">99.99%</div><div class="telemetry-stat-label">Mainframe Uptime Map</div></div>
+                <div><div class="telemetry-stat-value">0.04ms</div><div class="telemetry-stat-label">Cache Return Velocity</div></div>
+            </div>
+
+            <!-- EXPANDED CORE NARRATIVE ROW 1 -->
+            <div class="bento-card-lux col-6 hover-lift">
+                <span class="meta-context-label">04 // Core Design Methodology</span>
+                <h3 style="font-family: var(--font-mono); font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase;">Cinematic Visual Systems</h3>
+                <div class="exhaustive-body-copy">
+                    <p>Our studio structures technical assets to present undeniable authority over the viewport layout. By pairing minimal dark interfaces with premium glassmorphic cards, the interface guides high-level corporate interactions toward target metrics smoothly. We avoid artificial beautification routines to ensure raw, high-contrast clarity.</p>
+                </div>
+            </div>
+
+            <!-- EXPANDED CORE NARRATIVE ROW 2 -->
+            <div class="bento-card-lux col-6 hover-tilt">
+                <span class="meta-context-label">05 // Backend Data Architecture</span>
+                <h3 style="font-family: var(--font-mono); font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase;">Cloud Processing Optimization</h3>
+                <div class="exhaustive-body-copy">
+                    <p>Modern applications require rigorous ledger safety steps to safeguard multi-currency transaction pools. Vortex develops isolated Node.js applications and cPanel cloud installations that eliminate data delivery bottlenecks, securing instant record routing paths for client analytical platforms under server strain.</p>
+                </div>
+            </div>
+
+            <div class="bento-card-lux col-12 hover-pulse">
+                <span class="meta-context-label">06 // Monolithic System Installation Registry</span>
+                <table class="registry-data-sheet">
+                    <thead>
+                        <tr>
+                            <th>REGISTRY COMPILER ID</th>
+                            <th>FUNCTIONAL REBUILD PARAMETERS</th>
+                            <th>VERIFIED TELEMETRY DATA CAPACITY</th>
+                            <th>STATUS SPECIFICATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="matrix-row-interaction">
+                            <td style="font-weight:700; font-family:var(--font-mono);">REG-VTX-099</td>
+                            <td>VORTEX Brand Infrastructure Presentation Framework.</td>
+                            <td>Sub-pixel graphic parameter alignment matrix.</td>
+                            <td style="color:var(--sapphire-core); font-weight:600;">ACTIVE // SECURE</td>
+                        </tr>
+                        <tr class="matrix-row-interaction">
+                            <td style="font-weight:700; font-family:var(--font-mono);">REG-NYS-26A</td>
+                            <td>NyayaSetu automated country legislative assistant database.</td>
+                            <td>Asynchronous regional legal tree data lookup paths.</td>
+                            <td style="color:var(--sapphire-core); font-weight:600;">ACTIVE // SECURE</td>
+                        </tr>
+                        <tr class="matrix-row-interaction">
+                            <td style="font-weight:700; font-family:var(--font-mono);">REG-FWD-MTX</td>
+                            <td>Farewell 2K26 custom motion-choreographed induction platforms.</td>
+                            <td>60Hz hardware-accelerated fluid animation layers.</td>
+                            <td style="color:var(--sapphire-core); font-weight:600;">ACTIVE // SECURE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- STAGE 2: ABOUT PANEL -->
+        <div id="stage-about" class="stage-canvas">
+            <div class="bento-card-lux col-12 hover-pulse">
+                <span class="meta-context-label">07 // Historical Narrative Profile Matrix</span>
+                <h2 class="editorial-title">Our Vision & Space Parameters</h2>
+                <div class="exhaustive-body-copy" style="columns: 2; gap: 3rem;">
+                    <p>Vortex handles technology transitions natively, bypassing heavy template formats to generate lightweight structural software layouts cleanly from scratch. Our studio isolates style parameters inside individual documents, securing absolute data continuity for international business networks.</p>
+                    <p>Our efforts center directly on presentation logic clarity, fine-tuning query channels to guarantee that client tracking dashboards reflow perfectly across large workplace viewports with zero structural display friction.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE 3: SERVICES PANEL -->
+        <div id="stage-services" class="stage-canvas">
+            <div class="bento-card-lux col-6 hover-lift">
+                <span class="meta-context-label">08 // Core Operations</span>
+                <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.5rem; margin-bottom:1rem;">Cloud Architectures</h3>
+                <p class="exhaustive-body-copy">Restructuring old software layouts into fast, clean cloud environments. We avoid unoptimized public frameworks, building independent data mainframes designed to execute concurrent transactions instantly during massive volume traffic spikes.</p>
+            </div>
+            <div class="bento-card-lux col-6 hover-tilt">
+                <span class="meta-context-label">09 // Private Intelligence Engine</span>
+                <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.5rem; margin-bottom:1rem;">Neural Indexing</h3>
+                <p class="exhaustive-body-copy">Custom telemetry parsing blocks that scan database columns natively, eliminating cache computation delay values and protecting front-end user displays from script crashes.</p>
+            </div>
+        </div>
+
+        <!-- STAGE 4: CONTACT PANEL -->
+        <div id="stage-contact" class="stage-canvas">
+            <div class="bento-card-lux col-12 hover-lift">
+                <span class="meta-context-label">10 // Technical Telemetry Secure Intake</span>
+                <form onsubmit="event.preventDefault(); alert('Telemetry channel secured.');" style="margin-top:2rem;">
+                    <div class="lux-form-row"><label>Identity Token Name</label><input type="text" required placeholder="e.g. Chief Technology Officer"></div>
+                    <div class="lux-form-row"><label>Core Modernization Brief</label><textarea rows="4" required placeholder="Detail legacy platform bottleneck concerns or latency metrics..."></textarea></div>
+                    <button type="submit" class="nav-tab-node" style="background:var(--sapphire-gradient); color:white; width:100%; border:none; padding:1.1rem; border-radius:6px; font-weight:700;">Transmit Secure Signal</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SYSTEM FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div><h3>VORTEX_CORE</h3><p style="margin-top:1rem; line-height:1.6; color:var(--text-body);">Designing premium corporate platforms, scalable automation pipelines, and clean typography workspaces safely.</p></div>
+            <div><h4>Operational Summary</h4><p style="line-height:2; color:var(--text-body);">Platform Class: Monolithic Base<br>Uptime Integrity: 100% Secure<br>&copy; 2026 Vortex Systems Ltd.</p></div>
+        </div>
+    </footer>
+
+    <!-- POINTER PHYSICS AND ROUTING LOGIC ENGINE -->
+    <script>
+        /* --- IMMACULATE CUSTOM MOUSE TRACKING ENGINE --- */
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        const cursorRing = document.getElementById('custom-cursor-ring');
+        let mX = 0, mY = 0, ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mX = e.clientX;
+            mY = e.clientY;
+            cursorDot.style.left = mX + 'px';
+            cursorDot.style.top = mY + 'px';
+        });
+
+        function processCursorAuraPhysics() {
+            ringX += (mX - ringX) * 0.12;
+            ringY += (mY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(processCursorAuraPhysics);
+        }
+        processCursorAuraPhysics();
+
+        function bindCursorInteractions() {
+            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux, input, textarea, canvas').forEach(node => {
+                node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
+                node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
+            });
+        }
+        bindCursorInteractions();
+
+        /* --- PRELOADER CHAIN TIMING CONTROLLER --- */
+        const lw1 = document.getElementById('lw1'); const lw2 = document.getElementById('lw2');
+        const lFill = document.getElementById('l-fill'); const preloader = document.getElementById('vortex-preloader');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => lFill.style.width = '100%', 100);
+            setTimeout(() => lw1.classList.add('active'), 250);
+            setTimeout(() => { lw1.classList.remove('active'); lw1.classList.add('exit'); }, 1150);
+            setTimeout(() => lw2.classList.add('active'), 1350);
+            setTimeout(() => { preloader.style.transform = 'translateY(-100vh)'; revealPanels(document.getElementById('stage-index')); }, 2400);
+        });
+
+        function revealPanels(targetStage) {
+            targetStage.querySelectorAll('.bento-card-lux').forEach((p, i) => { p.classList.remove('reveal-visible'); setTimeout(() => p.classList.add('reveal-visible'), i * 120); });
+        }
+
+        /* --- SPA INTERACTIVE CHANNEL SWITCH ROUTER --- */
+        function switchActiveStage(stageId, menuTabElement) {
+            if (menuTabElement) {
+                document.querySelectorAll('.nav-tab-node').forEach(n => n.classList.remove('tab-active'));
+                menuTabElement.classList.add('tab-active');
+            }
+            document.querySelectorAll('.stage-canvas').forEach(c => c.classList.remove('canvas-active'));
+            
+            const activeDestinationCanvas = document.getElementById('stage-' + stageId);
+            if (activeDestinationCanvas) {
+                activeDestinationCanvas.classList.add('canvas-active');
+                revealPanels(activeDestinationCanvas);
+                bindCursorInteractions();
+            }
+        }
+
+        function updateGlobalPalette(hexString) {
+            document.documentElement.style.setProperty('--sapphire-core', hexString);
+            document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${hexString} 100%)`);
+            particleCluster.forEach(p => { if(!p.isScattered) p.baseColor = hexString; });
+        }
+
+        /* --- DENSITY PIXEL ALGORITHM (15 PIXELS PER CHARACTER SPACE SPEC) --- */
+        const canvas = document.getElementById('typography-physics-canvas'); const ctx = canvas.getContext('2d');
+        let particleCluster = []; let globalHueRotationOffset = 0;
+
+        function resizeCanvasBoundsField() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            generateParticleTypographyTextMatrix();
+        }
+
+        class TextPixelBlockNode {
+            constructor(targetX, targetY, hexColor) {
+                this.origX = targetX; this.origY = targetY;
+                this.x = targetX + (Math.random() - 0.5) * 80; this.y = targetY + (Math.random() - 0.5) * 80;
+                this.size = 5; this.baseColor = hexColor; this.color = hexColor; this.vx = 0; this.vy = 0;
+                this.density = (Math.random() * 35) + 15; this.isScattered = false;
+            }
+            draw() { ctx.fillStyle = this.color; ctx.fillRect(this.x, this.y, this.size, this.size); }
+            updatePhysics(mouseCoordinates) {
+                let dx = mouseCoordinates.x - this.x; let dy = mouseCoordinates.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy); let maxForceDistance = 140;
+                if (distance < maxForceDistance) {
+                    this.isScattered = true;
+                    let forceFactor = (maxForceDistance - distance) / maxForceDistance;
+                    let forceAngleDirection = Math.atan2(dy, dx);
+                    this.vx += Math.cos(forceAngleDirection) * forceFactor * this.density * -0.65;
+                    this.vy += Math.sin(forceAngleDirection) * forceFactor * this.density * -0.65;
+                    this.color = `hsla(${(globalHueRotationOffset + distance) % 360}, 95%, 65%, 0.9)`;
+                } else {
+                    this.vx += (this.origX - this.x) * 0.08; this.vy += (this.origY - this.y) * 0.08;
+                    if (Math.abs(this.x - this.origX) < 1 && Math.abs(this.y - this.origY) < 1) {
+                        this.isScattered = false; this.color = document.documentElement.style.getPropertyValue('--sapphire-core') || '#00f0ff';
+                    }
+                }
+                this.vx *= 0.82; this.vy *= 0.82; this.x += this.vx; this.y += this.vy;
+            }
+        }
+
+        // CORRECTING TYPOGRAPHY CORE VALUE TO EXHIBIT S A M
+        function generateParticleTypographyTextMatrix() {
+            particleCluster = []; ctx.fillStyle = '#fff';
+            ctx.font = "bold clamp(5rem, 16vw, 12rem) 'Space Grotesk', sans-serif";
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText("S A M", canvas.width / 2, canvas.height / 2);
+            let bufferBytesMatrix = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let coreSelectedColor = document.documentElement.style.getPropertyValue('--sapphire-core') || '#00f0ff';
+            for (let y = 0; y < bufferBytesMatrix.height; y += 13) {
+                for (let x = 0; x < bufferBytesMatrix.width; x += 13) {
+                    let alphaIndex = (y * bufferBytesMatrix.width + x) * 4 + 3;
+                    if (bufferBytesMatrix.data[alphaIndex] > 128) { particleCluster.push(new TextPixelBlockNode(x, y, coreSelectedColor)); }
+                }
+            }
+        }
+
+        let currentInputCoordinates = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => { currentInputCoordinates.x = e.clientX; currentInputCoordinates.y = e.clientY; });
+        window.addEventListener('touchmove', (e) => { if(e.touches.length > 0) { currentInputCoordinates.x = e.touches[0].clientX; currentInputCoordinates.y = e.touches[0].clientY; } });
+
+        function processTypographyAnimationLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            globalHueRotationOffset = (globalHueRotationOffset + 2) % 360;
+            for (let idx = 0; idx < particleCluster.length; idx++) {
+                let pixelNode = particleCluster[idx]; pixelNode.updatePhysics(currentInputCoordinates); pixelNode.draw();
+            }
+            requestAnimationFrame(processTypographyAnimationLoop);
+        }
+
+        window.addEventListener('resize', resizeCanvasBoundsField);
+        resizeCanvasBoundsField(); processTypographyAnimationLoop();
+    </script>
+</body>
+</html>

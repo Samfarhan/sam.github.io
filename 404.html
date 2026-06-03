@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Error 404 — Link Severed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --text-pure: #ffffff;
+            --text-muted: #64748b;
+            --sapphire-lux: #0284c7;
+            --sapphire-gradient: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --curve: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: var(--text-pure); font-family: var(--font-sans); height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; -webkit-font-smoothing: antialiased; }
+
+        .error-code { font-size: clamp(5rem, 15vw, 10rem); font-weight: 700; color: var(--sapphire-lux); line-height: 1; letter-spacing: -0.05em; text-shadow: 0 0 40px rgba(2,132,199,0.15); margin-bottom: 1rem; }
+        .error-heading { font-size: 1.5rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+        .error-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; max-width: 550px; margin-bottom: 3rem; }
+        
+        .btn-return { background: var(--sapphire-gradient); color: white; padding: 1rem 2rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; box-shadow: 0 10px 20px -5px rgba(2,132,199,0.3); transition: transform 0.3s var(--curve); }
+        .btn-return:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <div class="error-code">404</div>
+    <h1 class="error-heading">Routing Connection Severed</h1>
+    <p class="error-desc">The specific structural routing path node you queried has been removed or restricted from our central index matrix registry. Please verify file path parameters.</p>
+    
+    <a href="index.html" class="btn-return">Return to Core Index Matrix</a>
+
+</body>
+</html>
