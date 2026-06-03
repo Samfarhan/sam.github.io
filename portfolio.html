@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX SYSTEM MASTER MATRIX // CASE PORTFOLIO</title>
+    <title>VORTEX SYSTEM MASTER MATRIX // PRODUCTION REGISTRY</title>
     
     <!-- Premium Typography Clusters -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,18 +13,18 @@
     <style>
         /* --- LUXURY SYSTEM VARIABLES --- */
         :root {
-            --bg-base: #030509;           
-            --surface-card: rgba(10, 18, 36, 0.45); 
+            --bg-base: #020408;           
+            --surface-card: rgba(6, 11, 25, 0.55); 
             --text-lead: #ffffff;
             --text-body: #94a3b8;
             --sapphire-core: #00f0ff;     
             --sapphire-gradient: linear-gradient(135deg, #0284c7 0%, #00f0ff 100%);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-inner-glow: inset 0 1px 2px rgba(255, 255, 255, 0.08);
             --font-display: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'Space Grotesk', sans-serif;
             --ease-schulz: cubic-bezier(0.16, 1, 0.3, 1);
-            --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.5);
+            --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             --vortex-brightness: 100%;
         }
 
@@ -37,115 +37,163 @@
             -webkit-font-smoothing: antialiased; 
             overflow-x: hidden;
             filter: brightness(var(--vortex-brightness));
+            cursor: none;
+            position: relative;
         }
 
-        /* --- STYLISH INSANELY CLEAN CUSTOM POINTER --- */
-        body { cursor: none; } 
-        
+        /* --- DECOUPLED UNLAGGED SCROLL-PROOF POINTER --- */
         #custom-cursor-dot {
-            position: fixed; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
-            pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); mix-blend-mode: difference; 
+            position: absolute; top: 0; left: 0; width: 6px; height: 6px; background: var(--sapphire-core); border-radius: 50%;
+            pointer-events: none; z-index: 100000; mix-blend-mode: difference; will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
         }
 
         #custom-cursor-ring {
-            position: fixed; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
-            pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); background: transparent;
-            transition: transform 0.3s var(--ease-schulz), width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
+            position: absolute; top: 0; left: 0; width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+            pointer-events: none; z-index: 99999; background: transparent; will-change: transform;
+            transform: translate3d(-100px, -100px, 0);
+            transition: width 0.3s var(--ease-schulz), height 0.3s var(--ease-schulz), border-color 0.3s;
         }
 
         body.cursor-hovering #custom-cursor-dot { width: 12px; height: 12px; background: var(--sapphire-core); mix-blend-mode: normal; }
-        body.cursor-hovering #custom-cursor-ring { width: 48px; height: 48px; border-color: var(--sapphire-core); transform: translate(-50%, -50%) scale(1.1); }
+        body.cursor-hovering #custom-cursor-ring { width: 54px; height: 54px; border-color: var(--sapphire-core); border-width: 1.5px; }
 
         @media (pointer: coarse) {
             body { cursor: auto; }
             #custom-cursor-dot, #custom-cursor-ring { display: none !important; }
         }
 
-        /* --- BACKGROUND LAYER MAPPING --- */
-        .simple-bg-grid {
-            position: absolute; inset: 0; z-index: 1;
+        /* --- BACKGROUND INFINITE LAB CANVAS LAYER --- */
+        .cyber-matrix-overlay {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.12;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 60px 60px; background-position: center top; pointer-events: none;
+                radial-gradient(var(--sapphire-core) 1px, transparent 0),
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 40px 40px, 80px 80px, 80px 80px;
         }
 
-        /* --- FIXED NAVBAR ASSEMBLY --- */
+        /* --- FLOATING LAB LINK HEADBAR --- */
         header {
             position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
-            width: calc(100% - 4rem); max-width: 1400px; padding: 0.8rem 2.5rem;
+            width: calc(100% - 4rem); max-width: 1400px; padding: 0.9rem 3rem;
             display: flex; justify-content: space-between; align-items: center; z-index: 10000;
-            background: rgba(3, 5, 9, 0.6); backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            background: rgba(2, 4, 8, 0.7); backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
             border: 1px solid var(--glass-border); border-radius: 100px;
             box-shadow: var(--shadow-premium), var(--glass-inner-glow);
         }
 
-        .agency-brand { font-family: var(--font-mono); font-weight: 700; font-size: 1.25rem; text-transform: uppercase; text-decoration: none; color: var(--text-lead); }
-        .agency-brand span { color: var(--sapphire-core); transition: color 0.4s; }
+        .agency-brand { font-family: var(--font-mono); font-weight: 700; font-size: 1.3rem; text-transform: uppercase; text-decoration: none; color: var(--text-lead); letter-spacing: -0.02em; }
+        .agency-brand span { color: var(--sapphire-core); }
         
         .nav-dock-cluster { display: flex; align-items: center; gap: 0.25rem; }
-        .nav-tab-node { text-decoration: none; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.6rem 1.4rem; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
-        .nav-tab-node.tab-active, .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.02); }
+        .nav-tab-links-wrapper { display: flex; gap: 0.25rem; }
+        .nav-tab-node { text-decoration: none; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--text-body); padding: 0.65rem 1.5rem; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-schulz); }
+        .nav-tab-node.tab-active, .nav-tab-node:hover { color: var(--sapphire-core); background: rgba(255, 255, 255, 0.03); box-shadow: var(--glass-inner-glow); }
 
-        .brightness-module { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
-        .brightness-module label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--text-body); }
+        .brightness-module { display: flex; align-items: center; gap: 0.75rem; margin-left: 1.5rem; padding-left: 1.5rem; border-left: 1px solid var(--glass-border); }
+        .brightness-module label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-body); }
         .vortex-slider { -webkit-appearance: none; appearance: none; width: 80px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; }
-        .vortex-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--sapphire-core); cursor: pointer; box-shadow: 0 0 8px var(--sapphire-core); }
+        .vortex-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--sapphire-core); cursor: pointer; box-shadow: 0 0 10px var(--sapphire-core); }
 
-        .color-palette-tray { display: flex; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--glass-border); }
-        .swatch-node { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+        .color-palette-tray { display: flex; gap: 0.6rem; margin-left: 1.5rem; padding-left: 1.5rem; border-left: 1px solid var(--glass-border); }
+        .swatch-node { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: transform 0.3s; }
+        .swatch-node:hover { transform: scale(1.2); }
         .swatch-cyan { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
         .swatch-purple { background: #a855f7; } .swatch-emerald { background: #10b981; } .swatch-crimson { background: #ff0055; } .swatch-gold { background: #f59e0b; }
 
-        /* --- CONTENT STRUCT PIPELINE --- */
-        main { max-width: 1600px; margin: 0 auto; padding: 10rem 4rem 6rem 4rem; position: relative; z-index: 3; }
-        .stage-canvas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.75rem; width: 100%; }
+        .mobile-menu-trigger-btn { display: none; background: transparent; border: none; cursor: pointer; flex-direction: column; gap: 6px; padding: 0.5rem; z-index: 10001; }
+        .mobile-bar-node { width: 24px; height: 2px; background-color: var(--text-lead); transition: transform 0.4s var(--ease-schulz), opacity 0.3s; }
+
+        /* --- MASTER SCROLL VIEWPORT CONTAINER --- */
+        main { 
+            max-width: 1500px; margin: 0 auto; padding: 12rem 2rem 6rem 2rem; position: relative; z-index: 3;
+            perspective: 1000px;
+        }
+        .stage-canvas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5rem; width: 100%; }
 
         .col-12 { grid-column: span 12; } .col-8 { grid-column: span 8; } 
         .col-4 { grid-column: span 4; }  .col-6 { grid-column: span 6; }
 
+        /* Luxury Interactive Bento Nodes */
         .bento-card-lux { 
-            background-color: var(--surface-card); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); 
-            border: 1px solid var(--glass-border); border-radius: 20px; padding: 4.5rem; position: relative; overflow: hidden; 
-            box-shadow: var(--shadow-premium), var(--glass-inner-glow); opacity: 0; transform: translateY(40px);
-            transition: border-color 0.5s, transform 0.8s var(--ease-schulz), opacity 0.6s ease;
+            background-color: var(--surface-card); 
+            backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); 
+            border: 1px solid var(--glass-border); border-radius: 24px; padding: 4.5rem; position: relative; overflow: hidden; 
+            box-shadow: var(--shadow-premium), var(--glass-inner-glow); opacity: 0; transform: translate3d(0, 40px, 0);
+            transition: border-color 0.4s, box-shadow 0.4s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
-        .bento-card-lux.reveal-visible { opacity: 1; transform: translateY(0); }
+        .bento-card-lux.reveal-visible { opacity: 1; transform: translate3d(0,0,0); }
 
-        .hover-lift:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-6px); }
-        .hover-tilt:hover { transform: translateY(-4px) rotate(0.5deg); border-color: var(--sapphire-core); }
+        .bento-card-lux:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 45px 80px -20px rgba(0, 240, 255, 0.1);
+        }
 
-        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; }
-        .editorial-title { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; text-transform: uppercase; }
-        .exhaustive-body-copy { font-size: 0.95rem; line-height: 1.85; color: var(--text-body); }
+        /* Interactive Blueprint Scopes */
+        .unique-blueprint-frame {
+            width: 100%; height: 260px; background: rgba(2, 4, 8, 0.9); border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px; margin-top: 2.5rem; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+            transform: translate3d(0, 0, 30px); box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+        .blueprint-grid-svg { width: 100%; height: 100%; position: absolute; inset: 0; pointer-events: none; }
+        .blueprint-trace-path { stroke: var(--sapphire-core); stroke-width: 1.2; fill: none; opacity: 0.25; stroke-dasharray: 4; transition: opacity 0.4s, stroke-width 0.4s; }
         
-        .case-media-wrapper {
-            width: 100%; height: 200px; background: rgba(5, 9, 17, 0.6); border: 1px solid var(--glass-border);
-            border-radius: 12px; margin-top: 2rem; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+        .bento-card-lux:hover .blueprint-trace-path { 
+            opacity: 0.9; stroke-width: 1.8; stroke-dasharray: 0;
+            animation: blueprintGlowPulse 2s infinite ease-in-out;
         }
-        .case-wireframe { stroke: var(--sapphire-core); stroke-width: 1; fill: none; opacity: 0.25; transition: opacity 0.4s; }
-        .bento-card-lux:hover .case-wireframe { opacity: 0.6; }
+        @keyframes blueprintGlowPulse { 0%, 100% { filter: drop-shadow(0 0 2px var(--sapphire-core)); } 50% { filter: drop-shadow(0 0 10px var(--sapphire-core)); } }
+
+        .meta-context-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.25em; display: block; margin-bottom: 1.5rem; transition: color 0.4s; transform: translate3d(0, 0, 15px); }
+        .editorial-title { font-family: var(--font-mono); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 1.5rem; text-transform: uppercase; transform: translate3d(0, 0, 25px); }
+        .exhaustive-body-copy { font-size: 0.98rem; line-height: 1.9; color: var(--text-body); transform: translate3d(0, 0, 20px); }
+        .exhaustive-body-copy p { margin-bottom: 1.5rem; }
+
+        /* High-Density Metric Clusters */
+        .spec-matrix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; transform: translate3d(0,0,20px); }
+        .spec-matrix-node { padding: 1.2rem; background: rgba(5, 9, 19, 0.5); border: 1px solid rgba(255,255,255,0.03); border-radius: 12px; }
+        .spec-node-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; color: var(--sapphire-core); margin-bottom: 0.25rem; }
+        .spec-node-value { font-size: 0.9rem; color: var(--text-lead); font-weight: 600; }
+
+        .telemetry-stat-value { font-family: var(--font-mono); font-size: 3.8rem; font-weight: 700; color: var(--text-lead); line-height: 1; margin-bottom: 0.5rem; transform: translate3d(0, 0, 35px); }
+        .telemetry-stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-body); text-transform: uppercase; letter-spacing: 0.15em; transform: translate3d(0, 0, 20px); }
 
         footer { background-color: #010204; color: #475569; padding: 6rem 4rem 3rem 4rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 4; }
-        .footer-grid-wrapper { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 4rem; max-width: 1500px; margin: 0 auto 4rem auto; }
+        .footer-grid-wrapper { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 4rem; max-width: 1400px; margin: 0 auto; }
         .footer-grid-wrapper h3 { font-family: var(--font-mono); font-size: 1.3rem; color: #ffffff; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-        .footer-grid-wrapper h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--sapphire-core); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; transition: color 0.4s; }
+        .footer-grid-wrapper h4 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--sapphire-core); text-transform: uppercase; margin-bottom: 1.2rem; }
         .footer-grid-wrapper ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
         .footer-grid-wrapper a { text-decoration: none; color: #64748b; font-size: 0.88rem; transition: color 0.3s; }
         .footer-grid-wrapper a:hover { color: white; }
-        .footer-baseline-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; max-width: 1500px; margin: 0 auto; }
+        .footer-baseline-bar { border-top: 1px solid rgba(255, 255, 255, 0.03); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; max-width: 1400px; margin: 3rem auto 0 auto; }
 
+        /* --- MOBILE SLIDEOUT TRANSITIONS --- */
         @media (max-width: 1100px) {
             .col-8, .col-4, .col-6 { grid-column: span 12; }
-            header { width: calc(100% - 1.5rem); padding: 0.6rem 1.2rem; top: 1rem; border-radius: 30px; flex-direction: column; gap: 1rem; }
-            .nav-dock-cluster { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-            nav { width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .nav-tab-node { padding: 0.5rem 1rem; font-size: 0.75rem; }
-            .brightness-module { border-left: none; margin-left: 0; padding-left: 0; }
-            .color-palette-tray { border-left: none; margin-left: 0; padding-left: 0; }
-            main { padding: 12rem 1.5rem 4rem 1.5rem; }
-            .bento-card-lux { padding: 2.5rem 1.5rem; }
+            header { width: calc(100% - 2rem); padding: 0.8rem 1.8rem; top: 1rem; border-radius: 40px; }
+            .mobile-menu-trigger-btn { display: flex; }
+            
+            .nav-tab-links-wrapper {
+                position: fixed; top: 0; right: 0; height: 100vh; width: 280px;
+                background: rgba(2, 4, 8, 0.98); backdrop-filter: blur(30px);
+                border-left: 1px solid var(--glass-border);
+                flex-direction: column; padding: 8rem 2rem 2rem 2rem; gap: 1rem;
+                transform: translate3d(100%, 0, 0); transition: transform 0.5s var(--ease-schulz);
+                z-index: 9999;
+            }
+            header.menu-expanded .nav-tab-links-wrapper { transform: translate3d(0, 0, 0); }
+            header.menu-expanded .mobile-bar-node:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            header.menu-expanded .mobile-bar-node:nth-child(2) { opacity: 0; }
+            header.menu-expanded .mobile-bar-node:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            
+            .brightness-module, .color-palette-tray { margin-left: 0; padding-left: 0; border-left: none; margin-top: 1rem; }
+            main { padding: 10rem 1.5rem 4rem 1.5rem; }
+            .bento-card-lux { padding: 3rem 1.5rem; }
+            .spec-matrix-grid { grid-template-columns: 1fr; }
             .footer-grid-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
         }
     </style>
@@ -154,100 +202,130 @@
 
     <div id="custom-cursor-dot"></div>
     <div id="custom-cursor-ring"></div>
-    <div class="simple-bg-grid"></div>
+    <div class="cyber-matrix-overlay"></div>
 
-    <header class="ui-bind">
+    <!-- FLOATING INTERACTIVE NAVIGATION PANEL -->
+    <header>
         <a href="index.html" class="agency-brand">VORTEX<span>_</span></a>
         <div class="nav-dock-cluster">
-            <nav style="display: flex; gap: 0.25rem;">
+            <div class="nav-tab-links-wrapper">
                 <a href="index.html" class="nav-tab-node">INDEX</a>
                 <a href="about.html" class="nav-tab-node">ABOUT</a>
                 <a href="services.html" class="nav-tab-node">SERVICES</a>
                 <a href="portfolio.html" class="nav-tab-node tab-active">PORTFOLIO</a>
                 <a href="contact.html" class="nav-tab-node">CONTACT</a>
-            </nav>
-            
-            <div class="brightness-module">
-                <label for="vortex-lum-range">LUM</label>
-                <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
-            </div>
+                
+                <div class="brightness-module">
+                    <label for="vortex-lum-range">LUM</label>
+                    <input type="range" id="vortex-lum-range" class="vortex-slider" min="30" max="170" value="100" oninput="adjustGlobalLuminance(this.value)">
+                </div>
 
-            <div class="color-palette-tray">
-                <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
-                <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
-                <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
-                <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
-                <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+                <div class="color-palette-tray">
+                    <div class="swatch-node swatch-cyan" onclick="updateGlobalPalette('#00f0ff')"></div>
+                    <div class="swatch-node swatch-purple" onclick="updateGlobalPalette('#a855f7')"></div>
+                    <div class="swatch-node swatch-emerald" onclick="updateGlobalPalette('#10b981')"></div>
+                    <div class="swatch-node swatch-crimson" onclick="updateGlobalPalette('#ff0055')"></div>
+                    <div class="swatch-node swatch-gold" onclick="updateGlobalPalette('#f59e0b')"></div>
+                </div>
             </div>
+            
+            <button class="mobile-menu-trigger-btn" onclick="document.querySelector('header').classList.toggle('menu-expanded')">
+                <div class="mobile-bar-node"></div>
+                <div class="mobile-bar-node"></div>
+                <div class="mobile-bar-node"></div>
+            </button>
         </div>
     </header>
 
+    <!-- $99,999 HIGH-DENSITY GRAPHIC REPOSITORY MATRIX -->
     <main>
         <div class="stage-canvas">
             
-            <!-- MASTER DEPLOYMENT CARD 1: NYAYASETU -->
-            <div class="bento-card-lux col-8 hover-lift">
-                <span class="meta-context-label">CASE_01 // REB_REGISTRY_NYS</span>
-                <h2 class="editorial-title">NyayaSetu Architecture Installation</h2>
+            <!-- EXCLUSIVE CASE: NYAYASETU AI INFRASTRUCTURE -->
+            <div class="bento-card-lux col-8">
+                <span class="meta-context-label">PROJECT // INTEGRATION_NODE_NYS</span>
+                <h2 class="editorial-title">NyayaSetu AI Awareness Engine</h2>
                 <div class="exhaustive-body-copy">
-                    <p>NyayaSetu is a technical legal assistant programmed natively to split and parse Indian legislative database parameters into easily readable modules for citizens. Built natively from scratch, it isolates query pathways cleanly to secure continuous tracking metrics across rural mobile device frames.</p>
+                    <p>An AI-powered legal awareness assistant engineered to simplify complex Indian laws, civic duties, and constitutional frameworks for rural citizens. By translating dense legislative configurations into dynamic interactive streams, it strips away comprehension bottlenecks cleanly.</p>
+                    <p>The backend features custom-optimized asynchronous data-lookup matrices. This isolated operational model runs directly without bulky external scripts, preserving instantaneous compilation and execution loops across entry-level mobile devices.</p>
                 </div>
-                <div class="case-media-wrapper">
-                    <svg width="100%" height="100%" viewBox="0 0 600 200">
-                        <path class="case-wireframe" d="M10,100 L150,30 L300,170 L450,40 L590,100" />
-                        <circle cx="150" cy="30" r="4" fill="var(--sapphire-core)"/>
-                        <circle cx="450" cy="40" r="4" fill="var(--sapphire-core)"/>
+                <div class="spec-matrix-grid">
+                    <div class="spec-matrix-node"><div class="spec-node-label">Core Engine</div><div class="spec-node-value">Python System</div></div>
+                    <div class="spec-matrix-node"><div class="spec-node-label">Architecture</div><div class="spec-node-value">Decoupled API</div></div>
+                    <div class="spec-matrix-node"><div class="spec-node-label">Latency Map</div><div class="spec-node-value">Asynchronous</div></div>
+                </div>
+                <div class="unique-blueprint-frame">
+                    <svg class="blueprint-grid-svg" viewBox="0 0 600 220">
+                        <path class="blueprint-trace-path" d="M 40,160 L 160,50 L 300,180 L 440,40 L 560,150" />
+                        <circle cx="160" cy="50" r="4" fill="var(--sapphire-core)" />
+                        <circle cx="440" cy="40" r="4" fill="var(--sapphire-core)" />
                     </svg>
                 </div>
             </div>
 
-            <!-- CORE TELEMETRY METRIC READOUT -->
-            <div class="bento-card-lux col-4 hover-tilt" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <!-- CORE BENCHMARK MATRIX READOUT -->
+            <div class="bento-card-lux col-4" style="display:flex; flex-direction:column; justify-content:space-between;">
                 <div>
-                    <span class="meta-context-label">METRICS // REPLICA.NODE</span>
-                    <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.3rem; margin-bottom:1rem;">Operational Authority</h3>
-                    <p class="exhaustive-body-copy" style="font-size:0.9rem;">Every single file presentation module is deployed clean from scratch to eliminate layout constraints.</p>
+                    <span class="meta-context-label">METRICS // VELOCITY_BENCH</span>
+                    <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.2rem; margin-bottom:1rem;">Structural Authority</h3>
+                    <p class="exhaustive-body-copy" style="font-size:0.9rem;">Standalone system deployment clusters mapped inside pristine, native source tracks to prevent script compile overflows and concurrency overhead loops.</p>
                 </div>
-                <div style="border-top:1px solid var(--glass-border); padding-top:1.5rem;">
-                    <div class="telemetry-stat-value">60Hz</div>
-                    <div class="telemetry-stat-label">Fluid System Lock</div>
+                <div>
+                    <div class="telemetry-stat-value">0.04ms</div>
+                    <div class="telemetry-stat-label">Cache Return Index</div>
                 </div>
             </div>
 
-            <!-- MASTER DEPLOYMENT CARD 2: FAREWELL 2K26 -->
-            <div class="bento-card-lux col-4 hover-tilt" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <!-- EXCLUSIVE CASE: FAREWELL 2K26 TIMELINE -->
+            <div class="bento-card-lux col-4" style="display:flex; flex-direction:column; justify-content:space-between;">
                 <div>
-                    <span class="meta-context-label">CASE_02 // REG_FWD_MTX</span>
-                    <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.3rem; margin-bottom:1rem;">Farewell 2K26 Core</h3>
-                    <p class="exhaustive-body-copy" style="font-size:0.9rem;">A hardware accelerated digital invitation application engineered with motion designed transition timelines for school layout events.</p>
+                    <span class="meta-context-label">PROJECT // TIMELINE_DOCK</span>
+                    <h3 style="font-family:var(--font-mono); text-transform:uppercase; font-size:1.2rem; margin-bottom:1rem;">Farewell 2K26 System</h3>
+                    <p class="exhaustive-body-copy" style="font-size:0.9rem;">A customized, high-contrast digital invitation portal engineered specifically for institutional farewell setups. Mapped natively with structured fluid keyframe layers.</p>
                 </div>
-                <div class="case-media-wrapper" style="height:120px;">
-                    <svg width="100%" height="100%" viewBox="0 0 300 120">
-                        <rect x="50" y="20" width="200" height="80" class="case-wireframe" rx="8" />
-                        <line x1="50" y1="60" x2="250" y2="60" class="case-wireframe" />
+                <div class="unique-blueprint-frame" style="height:120px;">
+                    <svg class="blueprint-grid-svg" viewBox="0 0 300 120">
+                        <rect x="30" y="20" width="240" height="80" class="blueprint-trace-path" rx="12" />
+                        <circle cx="150" cy="60" r="12" class="blueprint-trace-path" />
                     </svg>
                 </div>
             </div>
 
-            <!-- MASTER DEPLOYMENT CARD 3: SAMVORTEX DOMAIN -->
-            <div class="bento-card-lux col-8 hover-lift">
-                <span class="meta-context-label">CASE_03 // WEB_HOST_REGISTRY</span>
-                <h2 class="editorial-title">Samvortex.in Core Platform</h2>
+            <!-- EXCLUSIVE CASE: SAMVORTEX DOMAIN DATA MATRIX -->
+            <div class="bento-card-lux col-8">
+                <span class="meta-context-label">PROJECT // MAIN_HOST_LOCK</span>
+                <h2 class="editorial-title">Samvortex.in Platform Infrastructure</h2>
                 <div class="exhaustive-body-copy">
-                    <p>The core digital infrastructure domain managed for our services brand index. Built natively around Node.js server architectures and cPanel directory controls, the interface serves fluid parameters at heavy compile ratios with absolute precision.</p>
+                    <p>The centralized production environment managing the unified digital brand presence for Vortex. Developed using raw Node.js environment paths and structured cPanel tracking directories to shield operational assets gracefully from concurrency errors.</p>
+                    <p>The layout architecture guarantees a zero-latency loading track across global servers, rendering geometric grid layers smoothly at up to 120Hz monitor refresh thresholds without script bottlenecks.</p>
                 </div>
-                <div class="case-media-wrapper">
-                    <svg width="100%" height="100%" viewBox="0 0 600 200">
-                        <circle cx="300" cy="100" r="60" class="case-wireframe" />
-                        <circle cx="300" cy="100" r="30" class="case-wireframe" />
-                        <line x1="0" y1="100" x2="600" y2="100" class="case-wireframe" />
+                <div class="spec-matrix-grid">
+                    <div class="spec-matrix-node"><div class="spec-node-label">Environment</div><div class="spec-node-value">Node.js Server</div></div>
+                    <div class="spec-matrix-node"><div class="spec-node-label">Deployment</div><div class="spec-node-value">cPanel Matrix</div></div>
+                    <div class="spec-matrix-node"><div class="spec-node-label">Visual Sync</div><div class="spec-node-value">120Hz Target</div></div>
+                </div>
+                <div class="unique-blueprint-frame">
+                    <svg class="blueprint-grid-svg" viewBox="0 0 600 220">
+                        <circle cx="300" cy="110" r="65" class="blueprint-trace-path" />
+                        <line x1="50" y1="110" x2="550" y2="110" stroke="rgba(255,255,255,0.03)" />
                     </svg>
+                </div>
+            </div>
+
+            <!-- NEW EXCLUSIVE DATA LAYER: MOTION CHOREOGRAPHY SPECS -->
+            <div class="bento-card-lux col-12">
+                <span class="meta-context-label">04 // GPU Vector Performance & Post Production Registry</span>
+                <h2 class="editorial-title">High-Fidelity Cinema Formatting Configurations</h2>
+                <div class="exhaustive-body-copy" style="columns: 2; gap: 3.5rem;">
+                    <p>Vortex approaches layout mapping from an engineering standpoint. By stripping away heavy open-source frameworks, video sequences and motion parameters achieve hardware-accelerated processing speeds. Render outputs maintain precise contrast profiles and photorealistic visual balance.</p>
+                    <p>Every single layout constraint is designed from scratch to be compatible across mobile environments. The data-flow tracking pipelines lock into local memory parameters smoothly, delivering unmatched technical clarity across viewports.</p>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- PERFECTLY VISIBLE SCROLL-FIXED FOOTER -->
     <footer>
         <div class="footer-grid-wrapper">
             <div>
@@ -279,31 +357,75 @@
         </div>
     </footer>
 
-    <!-- POINTER PHYSICS AND LOCALSTORAGE STATE RETRIEVAL ENGINE -->
+    <!-- SCROLL-PROOF COORDINATE ENGINE & HYPER UI AUDIO DRIVERS -->
     <script>
-        const cursorDot = document.getElementById('custom-cursor-dot');
-        const cursorRing = document.getElementById('custom-cursor-ring');
-        let mX = 0, mY = 0, ringX = 0, ringY = 0;
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        let ringTargetX = 0, ringTargetY = 0, ringCurrentX = 0, ringCurrentY = 0;
 
+        const dotNode = document.getElementById('custom-cursor-dot');
+        const ringNode = document.getElementById('custom-cursor-ring');
+
+        /* High-End Micro-Interaction Frequency Sound Driver */
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playInteractionFrequencyChime(freq) {
+            try {
+                let osc = audioCtx.createOscillator();
+                let gainNode = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.value = freq;
+                gainNode.gain.setValueAtTime(0.012, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
+                osc.connect(gainNode); gainNode.connect(audioCtx.destination);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+            } catch(e) {}
+        }
+
+        /* Maps mouse tracing exactly on window absolute height fields to secure long scrolling operations */
         window.addEventListener('mousemove', (e) => {
-            mX = e.clientX; mY = e.clientY;
-            cursorDot.style.left = mX + 'px'; cursorDot.style.top = mY + 'px';
+            targetX = e.pageX;
+            targetY = e.pageY;
+            ringTargetX = e.pageX;
+            ringTargetY = e.pageY;
+
+            // 3D Tilt calculations calibrated safely around individual card centers rather than full stage coordinates to safeguard scrolling layouts
+            if (window.innerWidth > 1100) {
+                document.querySelectorAll('.bento-card-lux').forEach(card => {
+                    const cardBounds = card.getBoundingClientRect();
+                    const cardCenterX = cardBounds.left + cardBounds.width / 2;
+                    const cardCenterY = cardBounds.top + cardBounds.height / 2;
+                    const calcX = (cardCenterY - e.clientY) * 0.018;
+                    const calcY = (e.clientX - cardCenterX) * 0.018;
+                    card.style.transform = `translate3d(0, 0, 20px) rotateX(${calcX}deg) rotateY(${calcY}deg)`;
+                });
+            }
         });
 
-        function processCursorAuraPhysics() {
-            ringX += (mX - ringX) * 0.12; ringY += (mY - ringY) * 0.12;
-            cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
-            requestAnimationFrame(processCursorAuraPhysics);
+        function updateCursorFramePhysics() {
+            currentX += (targetX - currentX) * 0.42;
+            currentY += (targetY - currentY) * 0.42;
+            if(dotNode) dotNode.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+            ringCurrentX += (ringTargetX - ringCurrentX) * 0.15;
+            ringCurrentY += (ringTargetY - ringCurrentY) * 0.15;
+            if(ringNode) ringNode.style.transform = `translate3d(${ringCurrentX}px, ${ringCurrentY}px, 0) translate3d(-50%, -50%, 0)`;
+
+            requestAnimationFrame(updateCursorFramePhysics);
         }
-        processCursorAuraPhysics();
+        updateCursorFramePhysics();
 
         function bindCursorInteractions() {
-            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux, input, textarea').forEach(node => {
-                node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
-                node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
+            document.querySelectorAll('button, a, .swatch-node, .bento-card-lux').forEach(node => {
+                node.addEventListener('mouseenter', () => {
+                    document.body.classList.add('cursor-hovering');
+                    playInteractionFrequencyChime(910); // Futuristic UI feedback pitch
+                });
+                node.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('cursor-hovering');
+                    if (window.innerWidth > 1100 && node.classList.contains('bento-card-lux')) {
+                        node.style.transform = `translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)`;
+                    }
+                });
             });
         }
-        bindCursorInteractions();
 
         /* --- THE STATE STORAGE MANAGEMENT --- */
         function adjustGlobalLuminance(value) {
@@ -315,7 +437,8 @@
             document.documentElement.style.setProperty('--sapphire-core', hexString);
             document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${hexString} 100%)`);
             localStorage.setItem('vortex-saved-palette', hexString);
-            document.querySelectorAll('.case-wireframe').forEach(el => el.style.stroke = hexString);
+            document.querySelectorAll('.meta-context-label, .spec-node-label').forEach(el => el.style.color = hexString);
+            document.querySelectorAll('.blueprint-trace-path').forEach(el => el.style.stroke = hexString);
         }
 
         function applyStoredSystemStates() {
@@ -329,14 +452,16 @@
                 document.documentElement.style.setProperty('--sapphire-core', savedPalette);
                 document.documentElement.style.setProperty('--sapphire-gradient', `linear-gradient(135deg, #0284c7 0%, ${savedPalette} 100%)`);
                 setTimeout(() => {
-                    document.querySelectorAll('.case-wireframe').forEach(el => el.style.stroke = savedPalette);
+                    document.querySelectorAll('.meta-context-label, .spec-node-label').forEach(el => el.style.color = savedPalette);
+                    document.querySelectorAll('.blueprint-trace-path').forEach(el => el.style.stroke = savedPalette);
                 }, 50);
             }
         }
 
         window.addEventListener('load', () => {
             applyStoredSystemStates();
-            document.querySelectorAll('.bento-card-lux').forEach((p, i) => { setTimeout(() => p.classList.add('reveal-visible'), i * 120); });
+            bindCursorInteractions();
+            document.querySelectorAll('.bento-card-lux').forEach((p, i) => { setTimeout(() => p.classList.add('reveal-visible'), i * 100); });
         });
     </script>
 </body>
