@@ -1,0 +1,9 @@
+User-agent: AmazonAdBot
+Allow: /
+
+User-agent: *
+Disallow: /*?
+Disallow: */preview/
+Disallow: /cdn-cgi/
+
+Sitemap: https://samvortex.in/en/sitemaps/index.xml
