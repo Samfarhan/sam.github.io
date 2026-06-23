@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MedCore | The Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* CORE VARIABLES */
+        :root {
+            --bg-deep: #020203;
+            --accent-cyan: #00f2fe;
+            --accent-glow: rgba(0, 242, 254, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body { background-color: var(--bg-deep); color: var(--text-main); overflow-x: hidden; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* 🌌 ANIMATED AMBIENT BACKGROUND */
+        .ambient-glow { position: fixed; top: -50%; left: -50%; width: 200vw; height: 200vh; background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05) 0%, transparent 40%); z-index: -3; pointer-events: none; animation: slowDrift 15s ease-in-out infinite alternate; }
+        @keyframes slowDrift { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.1) translate(2%, 2%); } }
+
+        /* 📱 NAVIGATION & WORKING MENU */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 24px; background: rgba(2, 2, 3, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 2000; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--text-main); }
+        .nav-logo span { color: var(--accent-cyan); text-shadow: 0 0 15px var(--accent-glow); }
+        .menu-btn { color: var(--text-main); font-size: 1.8rem; background: none; border: none; cursor: pointer; z-index: 2001; transition: 0.3s; }
+
+        /* Full Screen Menu Overlay */
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 3, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 1500; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.4s ease-in-out; }
+        .menu-overlay.active { opacity: 1; pointer-events: all; }
+        .menu-links { display: flex; flex-direction: column; gap: 30px; text-align: center; }
+        .menu-links a { color: var(--text-main); font-size: 1.8rem; font-weight: 800; text-decoration: none; letter-spacing: 1px; transition: 0.3s; }
+        .menu-links a:hover, .menu-links a:active { color: var(--accent-cyan); transform: scale(1.05); }
+
+        /* 🗂️ MAIN CONTAINER & VIEW ROUTING */
+        main { flex: 1; padding: 100px 20px 40px 20px; position: relative; }
+        .vault-view { display: none; }
+        .vault-view.active { display: block; }
+
+        /* ✨ TYPOGRAPHY & MOTION GRAPHICS */
+        .manifesto-block { border-left: 2px solid var(--accent-cyan); padding-left: 18px; margin-bottom: 35px; background: linear-gradient(90deg, rgba(0,242,254,0.04), transparent); padding-top: 12px; padding-bottom: 12px; border-radius: 0 12px 12px 0; }
+        .manifesto-block p { font-size: 0.95rem; color: #d1d5db; line-height: 1.7; font-weight: 300; }
+        .manifesto-block strong { color: var(--accent-cyan); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem; display: block; margin-bottom: 5px; }
+
+        .section-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -1px; background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; letter-spacing: 0.5px; }
+
+        /* STAGGERED CASCADE ANIMATIONS */
+        .vault-view.active .animate-up { animation: cascadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(25px); }
+        .delay-1 { animation-delay: 0.05s; } .delay-2 { animation-delay: 0.1s; } .delay-3 { animation-delay: 0.15s; } .delay-4 { animation-delay: 0.2s; } .delay-5 { animation-delay: 0.25s; }
+        
+        @keyframes cascadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* SUBJECT CARDS */
+        .subject-grid { display: flex; flex-direction: column; gap: 16px; }
+        .subject-card { display: block; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 22px; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: var(--text-main); position: relative; overflow: hidden; }
+        .subject-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent); transition: 0.5s; }
+        .subject-card:active { transform: scale(0.97); background: rgba(0, 242, 254, 0.03); border-color: rgba(0, 242, 254, 0.2); }
+        .subject-card:active::before { left: 100%; }
+        
+        .sub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .sub-title { font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
+        .arrow-icon { color: var(--text-muted); font-size: 1.2rem; transition: 0.3s; }
+        .subject-card:active .arrow-icon { color: var(--accent-cyan); transform: translateX(5px); }
+        
+        .sub-body p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; font-weight: 400; }
+        
+        .data-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .d-tag { background: rgba(0, 242, 254, 0.05); border: 1px solid rgba(0, 242, 254, 0.1); padding: 6px 12px; border-radius: 8px; font-size: 0.7rem; color: var(--accent-cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CHAPTER LISTS */
+        .back-btn { display: inline-flex; align-items: center; color: var(--text-main); font-size: 0.8rem; font-weight: 800; margin-bottom: 25px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.2s; }
+        .back-btn span { color: var(--accent-cyan); margin-right: 8px; font-size: 1.2rem; transition: 0.3s; }
+        .back-btn:active span { transform: translateX(-5px); }
+        
+        .chapter-list { background: rgba(255,255,255,0.01); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .chapter-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: 0.3s; }
+        .chapter-item:last-child { border-bottom: none; }
+        .chapter-item:active { background: rgba(0, 242, 254, 0.04); padding-left: 25px; }
+        .chap-info h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.3px; }
+        .chap-info p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+
+        /* RESOURCE GRIDS */
+        .category-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin: 35px 0 15px 0; border-bottom: 1px solid rgba(0, 242, 254, 0.1); padding-bottom: 8px; font-weight: 900; }
+        .resource-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .resource-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
+        .resource-card:active { border-color: var(--accent-cyan); transform: scale(0.97); box-shadow: 0 5px 20px rgba(0, 242, 254, 0.1); }
+        .res-info h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.3px; }
+        .res-info p { font-size: 0.8rem; color: var(--text-muted); }
+        .res-icon { color: var(--text-muted); font-size: 1.4rem; transition: 0.3s; }
+        .resource-card:active .res-icon { color: var(--accent-cyan); transform: scale(1.1); }
+
+        /* 🔔 CUSTOM POPUP MODAL (THE CUTE ALERT BOX) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 3, 0.85); backdrop-filter: blur(10px); z-index: 3000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .custom-modal { background: rgba(20, 22, 28, 0.95); border: 1px solid var(--accent-cyan); border-radius: 24px; padding: 35px 24px; text-align: center; max-width: 320px; width: 90%; transform: scale(0.8) translateY(20px); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 15px 40px rgba(0, 242, 254, 0.2); }
+        .modal-overlay.active .custom-modal { transform: scale(1) translateY(0); }
+        
+        .modal-icon { font-size: 3.5rem; margin-bottom: 15px; animation: gentleBounce 2s infinite ease-in-out; }
+        @keyframes gentleBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        .custom-modal h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 12px; color: var(--text-main); letter-spacing: -0.5px; }
+        .custom-modal p { font-size: 0.95rem; color: #d1d5db; line-height: 1.6; margin-bottom: 30px; }
+        
+        .custom-modal button { background: var(--accent-cyan); color: #000; border: none; padding: 16px 30px; border-radius: 14px; font-weight: 900; font-size: 1.05rem; cursor: pointer; transition: 0.2s; width: 100%; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        .custom-modal button:active { transform: scale(0.95); background: #00c4cc; }
+
+        /* 🏷️ FOOTER */
+        footer { padding: 40px 24px; text-align: center; border-top: 1px solid var(--glass-border); background: linear-gradient(to top, rgba(0,242,254,0.02), transparent); margin-top: auto; }
+        .credit-text { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 5px; font-weight: 600; }
+        .credit-name { color: var(--accent-cyan); font-weight: 900; text-shadow: 0 0 15px var(--accent-glow); display: block; margin-top: 8px; font-size: 1.2rem; letter-spacing: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Med<span>Core</span></a>
+        <button class="menu-btn" id="menuToggle" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-links">
+            <a href="index.html">Home / Blueprint</a>
+            <a href="vault.html">The Vault (PDFs)</a>
+            <a href="ai.html">AI Logic Tutor</a>
+            <a href="tracker.html">Syllabus Tracker</a>
+        </div>
+    </div>
+
+    <!-- CUSTOM DOWNLOAD MESSAGE MODAL -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="custom-modal">
+            <div class="modal-icon">📂</div>
+            <h3>Work in Progress!</h3>
+            <p>Needhi Ji website abhi ban rha hai to jldi hi sb files available ho jaaynge tab tk aap bs website explore kr lijiye 👉🏻👈🏻</p>
+            <button onclick="closeModal()">Okay!</button>
+        </div>
+    </div>
+
+    <main>
+        <div id="view-subjects" class="vault-view active">
+            
+            <h1 class="section-title animate-up delay-1">Master Vault.</h1>
+            <p class="section-desc animate-up delay-1">Secure repository for NTA-aligned extraction.</p>
+
+            <div class="manifesto-block animate-up delay-2">
+                <strong>Intelligence Briefing</strong>
+                <p>To breach the 720-mark threshold, superficial reading yields zero results. This vault filters out the noise. Execute strictly via NCERT-aligned master notes, target weak zones with Assertion-Reasoning banks, and utilize rapid-fire flashcards. Precision execution is your only metric.</p>
+            </div>
+
+            <div class="subject-grid">
+                <div class="subject-card animate-up delay-3" onclick="loadChapters('Biology')">
+                    <div class="sub-header">
+                        <h2 class="sub-title">Biology <span>🧬</span></h2>
+                        <div class="arrow-icon">→</div>
+                    </div>
+                    <div class="sub-body">
+                        <p>The 360-mark anchor. Absolute retention of NCERT lines is non-negotiable. Modules here dissect high-weightage patterns in Botany and Zoology.</p>
+                    </div>
+                    <div class="data-tags">
+                        <span class="d-tag">38 Modules</span>
+                        <span class="d-tag">Max Yield</span>
+                    </div>
+                </div>
+
+                <div class="subject-card animate-up delay-4" onclick="loadChapters('Chemistry')">
+                    <div class="sub-header">
+                        <h2 class="sub-title">Chemistry <span>🧪</span></h2>
+                        <div class="arrow-icon">→</div>
+                    </div>
+                    <div class="sub-body">
+                        <p>The rank accelerator. Mastering organic reaction pathways and inorganic exceptions separates the top 1% from the crowd.</p>
+                    </div>
+                    <div class="data-tags">
+                        <span class="d-tag">30 Modules</span>
+                        <span class="d-tag">Core Mechanisms</span>
+                    </div>
+                </div>
+
+                <div class="subject-card animate-up delay-5" onclick="loadChapters('Physics')">
+                    <div class="sub-header">
+                        <h2 class="sub-title">Physics <span>🍎</span></h2>
+                        <div class="arrow-icon">→</div>
+                    </div>
+                    <div class="sub-body">
+                        <p>The ultimate decider. Concept-driven formula application. Focus extensively on Mechanics and Modern Physics to secure the 150+ bracket.</p>
+                    </div>
+                    <div class="data-tags">
+                        <span class="d-tag">29 Modules</span>
+                        <span class="d-tag">Application Heavy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-chapters" class="vault-view">
+            <div class="back-btn animate-up delay-1" onclick="switchView('view-subjects')"><span>←</span> Vault Root</div>
+            <h1 class="section-title animate-up delay-1" id="dynamic-subject-title">Subject</h1>
+            
+            <div class="manifesto-block animate-up delay-2" style="margin-top: 15px;">
+                <strong>Strategic Directive</strong>
+                <p id="dynamic-subject-desc">Target high-yield modules first. Ensure your theoretical baseline is perfect before initiating Assertion-Reason sequences.</p>
+            </div>
+
+            <div class="chapter-list" id="dynamic-chapter-list"></div>
+        </div>
+
+        <div id="view-resources" class="vault-view">
+            <div class="back-btn animate-up delay-1" onclick="switchView('view-chapters')"><span>←</span> Modules</div>
+            <h1 class="section-title animate-up delay-1" id="dynamic-chapter-title" style="font-size: 1.6rem; line-height: 1.2; margin-bottom: 10px;">Chapter Name</h1>
+            
+            <div class="category-header animate-up delay-2">Core Theory & Analytics</div>
+            <div class="resource-grid animate-up delay-2">
+                <!-- REPLACED alert() WITH showModal() -->
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Revision Notes</h4><p>High-density concept summaries.</p></div>
+                    <div class="res-icon">📄</div>
+                </div>
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>NCERT Core Extract</h4><p>Line-by-line crucial highlights.</p></div>
+                    <div class="res-icon">⚡</div>
+                </div>
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Formula Matrix / Mind Maps</h4><p>Visual interconnectivity models.</p></div>
+                    <div class="res-icon">🕸️</div>
+                </div>
+            </div>
+
+            <div class="category-header animate-up delay-3">Testing & Repositories</div>
+            <div class="resource-grid animate-up delay-3">
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Daily Practice Papers</h4><p>Time-bound accuracy training.</p></div>
+                    <div class="res-icon">📝</div>
+                </div>
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Decade PYQs</h4><p>Past 10 years NTA pattern analysis.</p></div>
+                    <div class="res-icon">🕰️</div>
+                </div>
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Assertion & Reason</h4><p>AIIMS-grade logic evaluators.</p></div>
+                    <div class="res-icon">⚖️</div>
+                </div>
+                <div class="resource-card" onclick="showModal()">
+                    <div class="res-info"><h4>Active Recall Flashcards</h4><p>Rapid memorization protocols.</p></div>
+                    <div class="res-icon">📇</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="credit-text">Engineered By</div>
+        <div class="credit-name">SAM</div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Logic
+        function toggleMenu() {
+            const overlay = document.getElementById('menuOverlay');
+            const btn = document.getElementById('menuToggle');
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                btn.innerHTML = '☰'; 
+                document.body.style.overflow = 'auto'; 
+            } else {
+                overlay.classList.add('active');
+                btn.innerHTML = '✕'; 
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        // Custom Modal Popup Logic
+        function showModal() {
+            document.getElementById('downloadModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('downloadModal').classList.remove('active');
+        }
+
+        function switchView(viewId) {
+            const views = document.querySelectorAll('.vault-view');
+            views.forEach(view => {
+                view.classList.remove('active');
+                const animatedElements = view.querySelectorAll('.animate-up');
+                animatedElements.forEach(el => {
+                    el.style.animation = 'none';
+                    el.offsetHeight; 
+                    el.style.animation = null; 
+                });
+            });
+            
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0, 0); 
+        }
+
+        const chapterData = {
+            'Biology': [
+                { name: 'Molecular Basis of Inheritance', desc: 'Crucial mechanism weightage. Core focus required on DNA replication and translation.', delay: 'delay-2' }, 
+                { name: 'Genetics and Evolution', desc: 'Historically accounts for ~15 MCQs. High conceptual depth required.', delay: 'delay-3' },
+                { name: 'Human Physiology', desc: 'Massive syllabus chunk. Direct NCERT application.', delay: 'delay-4' }
+            ],
+            'Chemistry': [
+                { name: 'Coordination Compounds', desc: 'Predictable 3-4 questions every cycle. High scoring potential.', delay: 'delay-2' }, 
+                { name: 'General Organic Chemistry', desc: 'The foundation for all organic mechanisms. Do not skip.', delay: 'delay-3' }
+            ],
+            'Physics': [
+                { name: 'Optics & Modern Physics', desc: 'Heavy weightage. Focus on direct formula applications and derivations.', delay: 'delay-2' }, 
+                { name: 'Mechanics', desc: 'Conceptual core. Master vector logic and free body diagrams.', delay: 'delay-3' }
+            ]
+        };
+
+        function loadChapters(subject) {
+            document.getElementById('dynamic-subject-title').innerText = subject + " Modules";
+            
+            const listContainer = document.getElementById('dynamic-chapter-list');
+            listContainer.innerHTML = ''; 
+            
+            chapterData[subject].forEach(chapter => {
+                listContainer.innerHTML += `
+                    <div class="chapter-item animate-up ${chapter.delay}" onclick="loadResources('${chapter.name}')">
+                        <div class="chap-info">
+                            <h4>${chapter.name}</h4>
+                            <p>${chapter.desc}</p>
+                        </div>
+                        <div style="color: var(--accent-cyan); font-size: 1.4rem; font-weight: 900;">→</div>
+                    </div>`;
+            });
+            switchView('view-chapters');
+        }
+
+        function loadResources(chapterName) {
+            document.getElementById('dynamic-chapter-title').innerText = chapterName;
+            switchView('view-resources');
+        }
+    </script>
+</body>
+</html>
