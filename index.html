@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MedCore | Initiating...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* CORE VARIABLES */
+        :root {
+            --bg-deep: #020203;
+            --accent-cyan: #00f2fe;
+            --accent-glow: rgba(0, 242, 254, 0.8);
+            --text-main: #ffffff;
+            --text-muted: #8b92a5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-deep); 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
+            perspective: 1000px;
+        }
+
+        .ambient-glow { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150vw; height: 150vh; background: radial-gradient(circle at center, rgba(0, 242, 254, 0.05) 0%, transparent 60%); z-index: -2; animation: pulseGlow 4s infinite alternate; }
+        @keyframes pulseGlow { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } }
+
+        /* SUIT ANIMATION */
+        .suit-container { width: 150px; height: 150px; margin-bottom: 20px; position: relative; animation: floatSuit 3s ease-in-out infinite alternate, bringForward 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes bringForward { 0% { transform: translateY(50px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+        @keyframes floatSuit { 0% { transform: translateY(0px); } 100% { transform: translateY(-10px); } }
+
+        .coat-line { stroke-dasharray: 400; stroke-dashoffset: 400; animation: drawLine 2.5s ease-in-out forwards; }
+        .steth-line { stroke-dasharray: 300; stroke-dashoffset: 300; animation: drawLine 2.5s ease-in-out 0.5s forwards; }
+        .steth-node { opacity: 0; animation: fadeIn 1s ease-in-out 2.5s forwards; }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* TEXT SECTION */
+        .welcome-wrapper { text-align: center; opacity: 0; animation: text3DEntrance 2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; }
+        @keyframes text3DEntrance {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .title { font-size: 2.8rem; font-weight: 900; color: var(--text-main); text-transform: uppercase; line-height: 1.1; text-shadow: 0px 0px 10px rgba(0, 242, 254, 0.4); }
+        .title span { color: var(--accent-cyan); }
+
+        /* Designed By SAM Tag */
+        .designed-by { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; font-weight: 600; }
+
+        .subtitle { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; margin-top: 25px; font-weight: 600; animation: flicker 3s infinite; }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* LOADING BAR */
+        .loading-container { width: 250px; height: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-top: 40px; overflow: hidden; opacity: 0; animation: slideUpFade 1s ease 2s forwards; }
+        .loading-bar { height: 100%; width: 0%; background: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-glow); border-radius: 10px; animation: loadProgress 3.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards; }
+        @keyframes slideUpFade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes loadProgress { 0% { width: 0%; } 100% { width: 100%; } }
+
+        .fade-out-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-deep); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.8s ease-in-out; }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <div class="suit-container">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <path class="coat-line" d="M30 15 L45 40 L50 65 L55 40 L70 15 M30 15 L10 25 L10 90 M70 15 L90 25 L90 90 M45 40 L45 90 M55 40 L55 90" stroke="#ffffff" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+            <path class="steth-line" d="M75 30 C75 65 25 65 25 30" stroke="#00f2fe" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+            <circle class="steth-node" cx="25" cy="30" r="3" fill="#00f2fe"/>
+            <path class="steth-line" d="M50 57 L50 82" stroke="#00f2fe" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+            <circle class="steth-node" cx="50" cy="85" r="4.5" fill="none" stroke="#00f2fe" stroke-width="2.5"/>
+        </svg>
+    </div>
+
+    <div class="welcome-wrapper">
+        <div class="title">Welcome<br><span>Needhuu</span></div>
+        <div class="designed-by">Designed By SAM</div>
+        <div class="subtitle">MedCore System Booting...</div>
+    </div>
+
+    <div class="loading-container">
+        <div class="loading-bar"></div>
+    </div>
+
+    <div class="fade-out-overlay" id="fadeOverlay"></div>
+
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('fadeOverlay').style.opacity = '1';
+                // ✅ BUG FIXED HERE: Redirect to home.html instead of index.html
+                setTimeout(() => { window.location.href = 'home.html'; }, 800);
+            }, 5500); 
+        };
+    </script>
+</body>
+</html>
